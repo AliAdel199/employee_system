@@ -20,4 +20,17 @@ class DatabasePaths {
 
     return databaseDirectory;
   }
+
+  static Future<Directory> ensurePhotosDirectory() async {
+    final supportDirectory = await getApplicationSupportDirectory();
+    final photosDirectory = Directory(
+      path.join(supportDirectory.path, 'photos'),
+    );
+
+    if (!await photosDirectory.exists()) {
+      await photosDirectory.create(recursive: true);
+    }
+
+    return photosDirectory;
+  }
 }

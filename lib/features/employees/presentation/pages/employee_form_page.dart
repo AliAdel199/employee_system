@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../shared/data/managed_photo_store.dart';
 import '../../../../shared/presentation/widgets/app_section_card.dart';
 import '../../employees.dart';
 
@@ -50,6 +51,11 @@ class _EmployeeFormPageState extends ConsumerState<EmployeeFormPage> {
   DateTime? _birthDate;
   DateTime? _documentsIssueDate;
   String _photoPath = '';
+
+  /// المسار كما كان محفوظاً في قاعدة البيانات قبل بدء هذه الجلسة، يُستخدم
+  /// لتنظيف الصورة القديمة بعد نجاح الحفظ فقط (وليس فوراً عند الاختيار)، حتى
+  /// لا تُحذف صورة السجل الحالي إن ألغى المستخدم التعديل دون حفظ.
+  String _originalPhotoPath = '';
 
   @override
   void initState() {
@@ -152,11 +158,7 @@ class _EmployeeFormPageState extends ConsumerState<EmployeeFormPage> {
                         onPickImage: isBusy ? null : _pickImage,
                         onRemoveImage: isBusy || _photoPath.isEmpty
                             ? null
-                            : () {
-                                setState(() {
-                                  _photoPath = '';
-                                });
-                              },
+                            : _removeImage,
                       ),
                       const SizedBox(height: 18),
                       AppSectionCard(
@@ -418,6 +420,7 @@ class _EmployeeFormPageState extends ConsumerState<EmployeeFormPage> {
       _maritalStatus = employee.maritalStatus;
       _educationLevel = employee.educationLevel;
       _photoPath = employee.photoPath;
+      _originalPhotoPath = employee.photoPath;
     } catch (error) {
       _loadErrorMessage = error.toString();
     }
@@ -440,9 +443,39 @@ class _EmployeeFormPageState extends ConsumerState<EmployeeFormPage> {
       return;
     }
 
+    try {
+      final managedPath = await ManagedPhotoStore.importFile(file.path);
+      final previousPendingPath = _photoPath;
+
+      setState(() {
+        _photoPath = managedPath;
+      });
+
+      // نحذف فقط نسخة مؤقتة أُنشئت خلال هذه الجلسة ولم تُحفظ بعد؛ الصورة
+      // الأصلية المحمّلة من قاعدة البيانات تبقى حتى ينجح الحفظ.
+      if (previousPendingPath.isNotEmpty &&
+          previousPendingPath != managedPath &&
+          previousPendingPath != _originalPhotoPath) {
+        await ManagedPhotoStore.deleteIfManaged(previousPendingPath);
+      }
+    } catch (error) {
+      if (mounted) {
+        _showErrorMessage('تعذر حفظ الصورة المختارة: $error');
+      }
+    }
+  }
+
+  Future<void> _removeImage() async {
+    final previousPendingPath = _photoPath;
+
     setState(() {
-      _photoPath = file.path;
+      _photoPath = '';
     });
+
+    if (previousPendingPath.isNotEmpty &&
+        previousPendingPath != _originalPhotoPath) {
+      await ManagedPhotoStore.deleteIfManaged(previousPendingPath);
+    }
   }
 
   Future<void> _pickDate({
@@ -515,10 +548,19 @@ class _EmployeeFormPageState extends ConsumerState<EmployeeFormPage> {
     employee.jobNotes = _jobNotesController.text.trim();
     employee.generalNotes = _generalNotesController.text.trim();
 
+    final photoToCleanupAfterSave = _originalPhotoPath;
+
     try {
       await ref
           .read(employeeMutationControllerProvider.notifier)
           .saveEmployee(employee);
+
+      // بعد نجاح الحفظ فقط: نحذف الصورة القديمة إن استُبدلت بأخرى جديدة.
+      if (photoToCleanupAfterSave.isNotEmpty &&
+          photoToCleanupAfterSave != employee.photoPath) {
+        await ManagedPhotoStore.deleteIfManaged(photoToCleanupAfterSave);
+      }
+      _originalPhotoPath = employee.photoPath;
 
       if (!mounted) {
         return;

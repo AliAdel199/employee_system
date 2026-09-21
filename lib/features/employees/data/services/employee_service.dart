@@ -33,6 +33,10 @@ abstract class EmployeeService {
   Future<bool> existsByNationalNumber(String nationalNumber, {Id? excludeId});
 
   Future<bool> existsByEmployeeNumber(String employeeNumber, {Id? excludeId});
+
+  Future<EmployeeModel?> getEmployeeByNationalNumber(String nationalNumber);
+
+  Future<EmployeeModel?> getEmployeeByEmployeeNumber(String employeeNumber);
 }
 
 class IsarEmployeeService implements EmployeeService {
@@ -187,6 +191,38 @@ class IsarEmployeeService implements EmployeeService {
         .findAll();
 
     return matches.any((employee) => employee.id != excludeId);
+  }
+
+  @override
+  Future<EmployeeModel?> getEmployeeByNationalNumber(
+    String nationalNumber,
+  ) async {
+    final normalizedValue = nationalNumber.trim();
+    if (normalizedValue.isEmpty) {
+      return null;
+    }
+
+    final isar = await AppDatabase.open();
+    return isar.employeeModels
+        .filter()
+        .nationalNumberEqualTo(normalizedValue)
+        .findFirst();
+  }
+
+  @override
+  Future<EmployeeModel?> getEmployeeByEmployeeNumber(
+    String employeeNumber,
+  ) async {
+    final normalizedValue = employeeNumber.trim();
+    if (normalizedValue.isEmpty) {
+      return null;
+    }
+
+    final isar = await AppDatabase.open();
+    return isar.employeeModels
+        .filter()
+        .employeeNumberEqualTo(normalizedValue)
+        .findFirst();
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>

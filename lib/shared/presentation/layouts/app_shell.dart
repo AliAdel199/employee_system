@@ -21,8 +21,9 @@ class AppShell extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider);
     final isAdmin = currentUser?.role == UserRole.admin;
+    const adminOnlyPaths = {AppRoutes.users, AppRoutes.backup};
     final visibleNavigationItems = appNavigationItems
-        .where((item) => item.path != AppRoutes.users || isAdmin)
+        .where((item) => isAdmin || !adminOnlyPaths.contains(item.path))
         .toList();
 
     final selectedItem = _selectedItem;

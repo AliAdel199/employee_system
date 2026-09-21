@@ -184,4 +184,36 @@ class FakeEmployeeService implements EmployeeService {
       (e) => e.employeeNumber == normalized && e.id != excludeId,
     );
   }
+
+  @override
+  Future<EmployeeModel?> getEmployeeByNationalNumber(
+    String nationalNumber,
+  ) async {
+    final normalized = nationalNumber.trim();
+    if (normalized.isEmpty) {
+      return null;
+    }
+    for (final employee in _employees) {
+      if (employee.nationalNumber == normalized) {
+        return employee;
+      }
+    }
+    return null;
+  }
+
+  @override
+  Future<EmployeeModel?> getEmployeeByEmployeeNumber(
+    String employeeNumber,
+  ) async {
+    final normalized = employeeNumber.trim();
+    if (normalized.isEmpty) {
+      return null;
+    }
+    for (final employee in _employees) {
+      if (employee.employeeNumber == normalized) {
+        return employee;
+      }
+    }
+    return null;
+  }
 }

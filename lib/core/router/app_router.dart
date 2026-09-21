@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/auth.dart';
+import '../../features/backup/backup.dart';
 import '../../features/dashboard/dashboard.dart';
 import '../../features/employees/employees.dart';
 import '../../features/organization/organization.dart';
@@ -31,7 +32,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         return AppRoutes.dashboard;
       }
 
-      if (location == AppRoutes.users && currentUser.role != UserRole.admin) {
+      final isAdminOnlyRoute =
+          location == AppRoutes.users || location == AppRoutes.backup;
+      if (isAdminOnlyRoute && currentUser.role != UserRole.admin) {
         return AppRoutes.dashboard;
       }
 
@@ -86,6 +89,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.users,
             builder: (context, state) => const UsersManagementPage(),
+          ),
+          GoRoute(
+            path: AppRoutes.backup,
+            builder: (context, state) => const BackupPage(),
           ),
         ],
       ),

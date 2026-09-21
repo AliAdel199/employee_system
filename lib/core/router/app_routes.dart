@@ -11,6 +11,7 @@ class AppRoutes {
   static const String organization = '/organization';
   static const String reports = '/reports';
   static const String users = '/users';
+  static const String backup = '/backup';
 
   static String employeeEdit(int employeeId) => '/employees/$employeeId/edit';
 }
@@ -59,5 +60,11 @@ const appNavigationItems = [
     subtitle: 'إنشاء حسابات الدخول وتحديد الصلاحيات',
     path: AppRoutes.users,
     icon: Icons.manage_accounts_rounded,
+  ),
+  AppNavigationItem(
+    title: 'النسخ الاحتياطي والبيانات',
+    subtitle: 'نسخ احتياطي، واستيراد وتصدير بيانات الموظفين',
+    path: AppRoutes.backup,
+    icon: Icons.cloud_sync_outlined,
   ),
 ];

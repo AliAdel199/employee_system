@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../shared/data/managed_photo_store.dart';
 import '../../../../shared/presentation/widgets/app_section_card.dart';
 import '../../organization.dart';
 
@@ -30,6 +31,10 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage> {
   OrganizationInfoModel? _currentInfo;
   bool _didHydrate = false;
   String _logoPath = '';
+
+  /// المسار كما كان محفوظاً قبل بدء هذه الجلسة، يُستخدم لتنظيف الشعار القديم
+  /// بعد نجاح الحفظ فقط (وليس فوراً عند الاختيار).
+  String _originalLogoPath = '';
 
   @override
   void initState() {
@@ -115,11 +120,7 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage> {
                         onRemoveLogo:
                             mutationAsync.isLoading || _logoPath.isEmpty
                             ? null
-                            : () {
-                                setState(() {
-                                  _logoPath = '';
-                                });
-                              },
+                            : _removeLogo,
                       ),
                       const SizedBox(height: 18),
                       AppSectionCard(
@@ -240,6 +241,7 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage> {
   void _hydrateForm(OrganizationInfoModel? info) {
     _currentInfo = info;
     _logoPath = info?.logoPath ?? '';
+    _originalLogoPath = info?.logoPath ?? '';
     _ministryNameController.text = info?.ministryName ?? '';
     _organizationNameController.text = info?.organizationName ?? '';
     _branchNameController.text = info?.branchName ?? '';
@@ -262,9 +264,39 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage> {
       return;
     }
 
+    try {
+      final managedPath = await ManagedPhotoStore.importFile(file.path);
+      final previousPendingPath = _logoPath;
+
+      setState(() {
+        _logoPath = managedPath;
+      });
+
+      if (previousPendingPath.isNotEmpty &&
+          previousPendingPath != managedPath &&
+          previousPendingPath != _originalLogoPath) {
+        await ManagedPhotoStore.deleteIfManaged(previousPendingPath);
+      }
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('تعذر حفظ الشعار المختار: $error')));
+      }
+    }
+  }
+
+  Future<void> _removeLogo() async {
+    final previousPendingPath = _logoPath;
+
     setState(() {
-      _logoPath = file.path;
+      _logoPath = '';
     });
+
+    if (previousPendingPath.isNotEmpty &&
+        previousPendingPath != _originalLogoPath) {
+      await ManagedPhotoStore.deleteIfManaged(previousPendingPath);
+    }
   }
 
   Future<void> _saveOrganizationInfo() async {
@@ -283,13 +315,21 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage> {
     info.email = _emailController.text.trim();
     info.reportsFooter = _reportsFooterController.text.trim();
 
+    final logoToCleanupAfterSave = _originalLogoPath;
+
     try {
       final savedInfo = await ref
           .read(organizationInfoMutationControllerProvider.notifier)
           .saveOrganizationInfo(info);
 
+      if (logoToCleanupAfterSave.isNotEmpty &&
+          logoToCleanupAfterSave != savedInfo.logoPath) {
+        await ManagedPhotoStore.deleteIfManaged(logoToCleanupAfterSave);
+      }
+
       setState(() {
         _currentInfo = savedInfo;
+        _originalLogoPath = savedInfo.logoPath;
       });
 
       if (!mounted) {
@@ -349,10 +389,17 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage> {
     }
 
     if (success) {
+      await ManagedPhotoStore.deleteIfManaged(_originalLogoPath);
+
+      if (!mounted) {
+        return;
+      }
+
       setState(() {
         _currentInfo = null;
         _didHydrate = false;
         _logoPath = '';
+        _originalLogoPath = '';
         _ministryNameController.clear();
         _organizationNameController.clear();
         _branchNameController.clear();
