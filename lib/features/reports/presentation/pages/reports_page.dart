@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pdf/pdf.dart';
@@ -56,10 +59,17 @@ class ReportsPage extends ConsumerWidget {
                   label: const Text('طباعة / PDF'),
                 ),
                 OutlinedButton.icon(
-                  onPressed: () =>
-                      _showSoon(context, 'تصدير Excel سيكون في خطوة Excel.'),
+                  onPressed: filteredEmployeesAsync.isLoading
+                      ? null
+                      : () => _exportToExcel(
+                          context: context,
+                          ref: ref,
+                          filter: filter,
+                          employees: filteredEmployees,
+                          selectedEmployee: selectedEmployee,
+                        ),
                   icon: const Icon(Icons.grid_on_rounded),
-                  label: const Text('Excel لاحقاً'),
+                  label: const Text('تصدير Excel'),
                 ),
               ],
             ),
@@ -186,6 +196,53 @@ class ReportsPage extends ConsumerWidget {
         );
       },
     );
+  }
+
+  Future<void> _exportToExcel({
+    required BuildContext context,
+    required WidgetRef ref,
+    required ReportFilterState filter,
+    required List<EmployeeModel> employees,
+    required EmployeeModel? selectedEmployee,
+  }) async {
+    if (filter.type == ReportType.employeeForm && selectedEmployee == null) {
+      _showSoon(context, 'اختر موظفاً أولاً قبل تصدير الاستمارة.');
+      return;
+    }
+
+    if (filter.type != ReportType.employeeForm && employees.isEmpty) {
+      _showSoon(context, 'لا توجد نتائج حالية لتصدير هذا التقرير.');
+      return;
+    }
+
+    try {
+      final excelService = ref.read(reportExcelServiceProvider);
+      final bytes = excelService.buildWorkbook(
+        reportType: filter.type,
+        employees: employees,
+        selectedEmployee: selectedEmployee,
+      );
+
+      final location = await getSaveLocation(
+        suggestedName: 'report_${filter.type.name}.xlsx',
+        acceptedTypeGroups: const [
+          XTypeGroup(label: 'Excel', extensions: ['xlsx']),
+        ],
+      );
+      if (location == null) {
+        return;
+      }
+
+      await File(location.path).writeAsBytes(bytes);
+
+      if (context.mounted) {
+        _showSoon(context, 'تم تصدير ملف Excel بنجاح.');
+      }
+    } catch (error) {
+      if (context.mounted) {
+        _showSoon(context, 'تعذر تصدير ملف Excel: $error');
+      }
+    }
   }
 }
 

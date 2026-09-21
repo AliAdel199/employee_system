@@ -39,10 +39,11 @@ migrate_working_dir/
 /libisar.so
 /libisar.dylib
 
-# نماذج PDF تُولَّد يدوياً عبر test/generate_sample_pdf_test.dart للمعاينة
-# فقط، وليست ملفات مصدرية يجب حفظها في المستودع.
+# نماذج PDF وExcel تُولَّد يدوياً عبر test/generate_sample_pdf_test.dart
+# للمعاينة فقط، وليست ملفات مصدرية يجب حفظها في المستودع.
 /sample_employee_form.pdf
 /sample_all_employees_report.pdf
+/sample_all_employees_report.xlsx
 
 # Symbolication related
 app.*.symbols
