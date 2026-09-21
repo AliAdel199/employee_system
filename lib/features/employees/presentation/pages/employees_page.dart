@@ -116,7 +116,10 @@ class _EmployeesPageState extends ConsumerState<EmployeesPage> {
                   onView: (employee) {
                     showDialog<void>(
                       context: context,
-                      builder: (_) => EmployeeDetailsDialog(employee: employee),
+                      builder: (_) => EmployeeDetailsDialog(
+                        employee: employee,
+                        onPrint: () => _openEmployeePrintPreview(employee),
+                      ),
                     );
                   },
                   onEdit: (employee) =>

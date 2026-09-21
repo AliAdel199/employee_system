@@ -4,9 +4,10 @@ import '../../../../core/theme/app_colors.dart';
 import '../../data/models/employee_model.dart';
 
 class EmployeeDetailsDialog extends StatelessWidget {
-  const EmployeeDetailsDialog({super.key, required this.employee});
+  const EmployeeDetailsDialog({super.key, required this.employee, this.onPrint});
 
   final EmployeeModel employee;
+  final VoidCallback? onPrint;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,15 @@ class EmployeeDetailsDialog extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           child: const Text('إغلاق'),
         ),
+        if (onPrint != null)
+          FilledButton.icon(
+            onPressed: () {
+              Navigator.of(context).pop();
+              onPrint!();
+            },
+            icon: const Icon(Icons.print_outlined),
+            label: const Text('طباعة'),
+          ),
       ],
     );
   }

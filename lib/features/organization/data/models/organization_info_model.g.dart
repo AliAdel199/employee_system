@@ -18,7 +18,11 @@ const OrganizationInfoModelSchema = CollectionSchema(
   name: r'OrganizationInfoModel',
   id: -7208818813449888381,
   properties: {
-    r'address': PropertySchema(id: 0, name: r'address', type: IsarType.string),
+    r'address': PropertySchema(
+      id: 0,
+      name: r'address',
+      type: IsarType.string,
+    ),
     r'branchName': PropertySchema(
       id: 1,
       name: r'branchName',
@@ -34,7 +38,11 @@ const OrganizationInfoModelSchema = CollectionSchema(
       name: r'departmentName',
       type: IsarType.string,
     ),
-    r'email': PropertySchema(id: 4, name: r'email', type: IsarType.string),
+    r'email': PropertySchema(
+      id: 4,
+      name: r'email',
+      type: IsarType.string,
+    ),
     r'logoPath': PropertySchema(
       id: 5,
       name: r'logoPath',
@@ -69,7 +77,7 @@ const OrganizationInfoModelSchema = CollectionSchema(
       id: 11,
       name: r'updatedAt',
       type: IsarType.dateTime,
-    ),
+    )
   },
   estimateSize: _organizationInfoModelEstimateSize,
   serialize: _organizationInfoModelSerialize,
@@ -87,9 +95,9 @@ const OrganizationInfoModelSchema = CollectionSchema(
           name: r'recordKey',
           type: IndexType.value,
           caseSensitive: true,
-        ),
+        )
       ],
-    ),
+    )
   },
   links: {},
   embeddedSchemas: {},
@@ -202,16 +210,12 @@ Id _organizationInfoModelGetId(OrganizationInfoModel object) {
 }
 
 List<IsarLinkBase<dynamic>> _organizationInfoModelGetLinks(
-  OrganizationInfoModel object,
-) {
+    OrganizationInfoModel object) {
   return [];
 }
 
 void _organizationInfoModelAttach(
-  IsarCollection<dynamic> col,
-  Id id,
-  OrganizationInfoModel object,
-) {
+    IsarCollection<dynamic> col, Id id, OrganizationInfoModel object) {
   object.id = id;
 }
 
@@ -234,15 +238,13 @@ extension OrganizationInfoModelByIndex
   }
 
   Future<List<OrganizationInfoModel?>> getAllByRecordKey(
-    List<String> recordKeyValues,
-  ) {
+      List<String> recordKeyValues) {
     final values = recordKeyValues.map((e) => [e]).toList();
     return getAllByIndex(r'recordKey', values);
   }
 
   List<OrganizationInfoModel?> getAllByRecordKeySync(
-    List<String> recordKeyValues,
-  ) {
+      List<String> recordKeyValues) {
     final values = recordKeyValues.map((e) => [e]).toList();
     return getAllByIndexSync(r'recordKey', values);
   }
@@ -269,10 +271,8 @@ extension OrganizationInfoModelByIndex
     return putAllByIndex(r'recordKey', objects);
   }
 
-  List<Id> putAllByRecordKeySync(
-    List<OrganizationInfoModel> objects, {
-    bool saveLinks = true,
-  }) {
+  List<Id> putAllByRecordKeySync(List<OrganizationInfoModel> objects,
+      {bool saveLinks = true}) {
     return putAllByIndexSync(r'recordKey', objects, saveLinks: saveLinks);
   }
 }
@@ -280,14 +280,14 @@ extension OrganizationInfoModelByIndex
 extension OrganizationInfoModelQueryWhereSort
     on QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QWhere> {
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhere>
-  anyId() {
+      anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhere>
-  anyRecordKey() {
+      anyRecordKey() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'recordKey'),
@@ -296,22 +296,20 @@ extension OrganizationInfoModelQueryWhereSort
   }
 }
 
-extension OrganizationInfoModelQueryWhere
-    on
-        QueryBuilder<
-          OrganizationInfoModel,
-          OrganizationInfoModel,
-          QWhereClause
-        > {
+extension OrganizationInfoModelQueryWhere on QueryBuilder<OrganizationInfoModel,
+    OrganizationInfoModel, QWhereClause> {
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  idEqualTo(Id id) {
+      idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
+      return query.addWhereClause(IdWhereClause.between(
+        lower: id,
+        upper: id,
+      ));
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  idNotEqualTo(Id id) {
+      idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -334,7 +332,7 @@ extension OrganizationInfoModelQueryWhere
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  idGreaterThan(Id id, {bool include = false}) {
+      idGreaterThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -343,7 +341,7 @@ extension OrganizationInfoModelQueryWhere
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  idLessThan(Id id, {bool include = false}) {
+      idLessThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -352,250 +350,214 @@ extension OrganizationInfoModelQueryWhere
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  idBetween(
+      idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IdWhereClause.between(
-          lower: lowerId,
-          includeLower: includeLower,
-          upper: upperId,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IdWhereClause.between(
+        lower: lowerId,
+        includeLower: includeLower,
+        upper: upperId,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  recordKeyEqualTo(String recordKey) {
+      recordKeyEqualTo(String recordKey) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'recordKey', value: [recordKey]),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'recordKey',
+        value: [recordKey],
+      ));
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  recordKeyNotEqualTo(String recordKey) {
+      recordKeyNotEqualTo(String recordKey) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'recordKey',
-                lower: [],
-                upper: [recordKey],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'recordKey',
-                lower: [recordKey],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'recordKey',
+              lower: [],
+              upper: [recordKey],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'recordKey',
+              lower: [recordKey],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'recordKey',
-                lower: [recordKey],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'recordKey',
-                lower: [],
-                upper: [recordKey],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'recordKey',
+              lower: [recordKey],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'recordKey',
+              lower: [],
+              upper: [recordKey],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  recordKeyGreaterThan(String recordKey, {bool include = false}) {
+      recordKeyGreaterThan(
+    String recordKey, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'recordKey',
-          lower: [recordKey],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'recordKey',
+        lower: [recordKey],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  recordKeyLessThan(String recordKey, {bool include = false}) {
+      recordKeyLessThan(
+    String recordKey, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'recordKey',
-          lower: [],
-          upper: [recordKey],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'recordKey',
+        lower: [],
+        upper: [recordKey],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  recordKeyBetween(
+      recordKeyBetween(
     String lowerRecordKey,
     String upperRecordKey, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'recordKey',
-          lower: [lowerRecordKey],
-          includeLower: includeLower,
-          upper: [upperRecordKey],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'recordKey',
+        lower: [lowerRecordKey],
+        includeLower: includeLower,
+        upper: [upperRecordKey],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  recordKeyStartsWith(String RecordKeyPrefix) {
+      recordKeyStartsWith(String RecordKeyPrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'recordKey',
-          lower: [RecordKeyPrefix],
-          upper: ['$RecordKeyPrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'recordKey',
+        lower: [RecordKeyPrefix],
+        upper: ['$RecordKeyPrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  recordKeyIsEmpty() {
+      recordKeyIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'recordKey', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'recordKey',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterWhereClause>
-  recordKeyIsNotEmpty() {
+      recordKeyIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(indexName: r'recordKey', upper: ['']),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'recordKey',
-                lower: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'recordKey',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'recordKey',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'recordKey',
-                lower: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(indexName: r'recordKey', upper: ['']),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'recordKey',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'recordKey',
+              upper: [''],
+            ));
       }
     });
   }
 }
 
-extension OrganizationInfoModelQueryFilter
-    on
-        QueryBuilder<
-          OrganizationInfoModel,
-          OrganizationInfoModel,
-          QFilterCondition
-        > {
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressEqualTo(String value, {bool caseSensitive = true}) {
+extension OrganizationInfoModelQueryFilter on QueryBuilder<
+    OrganizationInfoModel, OrganizationInfoModel, QFilterCondition> {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> addressEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> addressGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> addressLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> addressBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -603,180 +565,137 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'address',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'address',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> addressStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> addressEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      addressContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      addressMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'address',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'address',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> addressIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'address', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'address',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  addressIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> addressIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'address', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'address',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> branchNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'branchName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'branchName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> branchNameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'branchName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'branchName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> branchNameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'branchName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'branchName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> branchNameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -784,251 +703,193 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'branchName',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'branchName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> branchNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'branchName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'branchName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> branchNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'branchName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'branchName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      branchNameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'branchName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'branchName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      branchNameMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'branchName',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'branchName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> branchNameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'branchName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'branchName',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  branchNameIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> branchNameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'branchName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'branchName',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  createdAtEqualTo(DateTime value) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> createdAtEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'createdAt', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createdAt',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  createdAtGreaterThan(DateTime value, {bool include = false}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> createdAtGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'createdAt',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  createdAtLessThan(DateTime value, {bool include = false}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> createdAtLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'createdAt',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  createdAtBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> createdAtBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'createdAt',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'createdAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> departmentNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'departmentName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'departmentName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> departmentNameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'departmentName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'departmentName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> departmentNameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'departmentName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'departmentName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> departmentNameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1036,180 +897,137 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'departmentName',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'departmentName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> departmentNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'departmentName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'departmentName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> departmentNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'departmentName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'departmentName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      departmentNameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'departmentName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'departmentName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      departmentNameMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'departmentName',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'departmentName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> departmentNameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'departmentName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'departmentName',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  departmentNameIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> departmentNameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'departmentName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'departmentName',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> emailEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'email',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'email',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> emailGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'email',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'email',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> emailLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'email',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'email',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> emailBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1217,251 +1035,193 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'email',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'email',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> emailStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'email',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'email',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> emailEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'email',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'email',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      emailContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'email',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'email',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      emailMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'email',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'email',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> emailIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'email', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'email',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  emailIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> emailIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'email', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'email',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  idEqualTo(Id value) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'id', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  idGreaterThan(Id value, {bool include = false}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> idGreaterThan(
+    Id value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'id',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  idLessThan(Id value, {bool include = false}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> idLessThan(
+    Id value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'id',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  idBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'id',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'id',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> logoPathEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'logoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'logoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> logoPathGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'logoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'logoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> logoPathLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'logoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'logoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> logoPathBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1469,180 +1229,137 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'logoPath',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'logoPath',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> logoPathStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'logoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'logoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> logoPathEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'logoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'logoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      logoPathContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'logoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'logoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      logoPathMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'logoPath',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'logoPath',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> logoPathIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'logoPath', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'logoPath',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  logoPathIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> logoPathIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'logoPath', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'logoPath',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> ministryNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'ministryName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ministryName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> ministryNameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'ministryName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'ministryName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> ministryNameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'ministryName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'ministryName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> ministryNameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1650,180 +1367,137 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'ministryName',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'ministryName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> ministryNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'ministryName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'ministryName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> ministryNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'ministryName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'ministryName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      ministryNameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'ministryName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'ministryName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      ministryNameMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'ministryName',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'ministryName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> ministryNameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'ministryName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ministryName',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  ministryNameIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> ministryNameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'ministryName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'ministryName',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> organizationNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'organizationName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'organizationName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> organizationNameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'organizationName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'organizationName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> organizationNameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'organizationName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'organizationName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> organizationNameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1831,180 +1505,137 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'organizationName',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'organizationName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> organizationNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'organizationName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'organizationName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> organizationNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'organizationName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'organizationName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      organizationNameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'organizationName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'organizationName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      organizationNameMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'organizationName',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'organizationName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> organizationNameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'organizationName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'organizationName',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  organizationNameIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> organizationNameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'organizationName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'organizationName',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> phoneNumberEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> phoneNumberGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> phoneNumberLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> phoneNumberBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2012,180 +1643,137 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'phoneNumber',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'phoneNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> phoneNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> phoneNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      phoneNumberContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      phoneNumberMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'phoneNumber',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'phoneNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> phoneNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'phoneNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'phoneNumber',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  phoneNumberIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> phoneNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'phoneNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'phoneNumber',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> recordKeyEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'recordKey',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'recordKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> recordKeyGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'recordKey',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'recordKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> recordKeyLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'recordKey',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'recordKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> recordKeyBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2193,180 +1781,137 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'recordKey',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'recordKey',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> recordKeyStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'recordKey',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'recordKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> recordKeyEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'recordKey',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'recordKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      recordKeyContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'recordKey',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'recordKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      recordKeyMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'recordKey',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'recordKey',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> recordKeyIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'recordKey', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'recordKey',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  recordKeyIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> recordKeyIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'recordKey', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'recordKey',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> reportsFooterEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'reportsFooter',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'reportsFooter',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterGreaterThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> reportsFooterGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'reportsFooter',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'reportsFooter',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterLessThan(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> reportsFooterLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'reportsFooter',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'reportsFooter',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> reportsFooterBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2374,366 +1919,317 @@ extension OrganizationInfoModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'reportsFooter',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'reportsFooter',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> reportsFooterStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'reportsFooter',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'reportsFooter',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> reportsFooterEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'reportsFooter',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'reportsFooter',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      reportsFooterContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'reportsFooter',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'reportsFooter',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+          QAfterFilterCondition>
+      reportsFooterMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'reportsFooter',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'reportsFooter',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterIsEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> reportsFooterIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'reportsFooter', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'reportsFooter',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  reportsFooterIsNotEmpty() {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> reportsFooterIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'reportsFooter', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'reportsFooter',
+        value: '',
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  updatedAtEqualTo(DateTime value) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> updatedAtEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'updatedAt', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updatedAt',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  updatedAtGreaterThan(DateTime value, {bool include = false}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> updatedAtGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'updatedAt',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'updatedAt',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  updatedAtLessThan(DateTime value, {bool include = false}) {
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> updatedAtLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'updatedAt',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'updatedAt',
+        value: value,
+      ));
     });
   }
 
-  QueryBuilder<
-    OrganizationInfoModel,
-    OrganizationInfoModel,
-    QAfterFilterCondition
-  >
-  updatedAtBetween(
+  QueryBuilder<OrganizationInfoModel, OrganizationInfoModel,
+      QAfterFilterCondition> updatedAtBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'updatedAt',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'updatedAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 }
 
-extension OrganizationInfoModelQueryObject
-    on
-        QueryBuilder<
-          OrganizationInfoModel,
-          OrganizationInfoModel,
-          QFilterCondition
-        > {}
+extension OrganizationInfoModelQueryObject on QueryBuilder<
+    OrganizationInfoModel, OrganizationInfoModel, QFilterCondition> {}
 
-extension OrganizationInfoModelQueryLinks
-    on
-        QueryBuilder<
-          OrganizationInfoModel,
-          OrganizationInfoModel,
-          QFilterCondition
-        > {}
+extension OrganizationInfoModelQueryLinks on QueryBuilder<OrganizationInfoModel,
+    OrganizationInfoModel, QFilterCondition> {}
 
 extension OrganizationInfoModelQuerySortBy
     on QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QSortBy> {
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByAddress() {
+      sortByAddress() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'address', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByAddressDesc() {
+      sortByAddressDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'address', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByBranchName() {
+      sortByBranchName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'branchName', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByBranchNameDesc() {
+      sortByBranchNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'branchName', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByCreatedAt() {
+      sortByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createdAt', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByCreatedAtDesc() {
+      sortByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByDepartmentName() {
+      sortByDepartmentName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'departmentName', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByDepartmentNameDesc() {
+      sortByDepartmentNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'departmentName', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByEmail() {
+      sortByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByEmailDesc() {
+      sortByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByLogoPath() {
+      sortByLogoPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'logoPath', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByLogoPathDesc() {
+      sortByLogoPathDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'logoPath', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByMinistryName() {
+      sortByMinistryName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ministryName', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByMinistryNameDesc() {
+      sortByMinistryNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ministryName', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByOrganizationName() {
+      sortByOrganizationName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'organizationName', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByOrganizationNameDesc() {
+      sortByOrganizationNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'organizationName', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByPhoneNumber() {
+      sortByPhoneNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phoneNumber', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByPhoneNumberDesc() {
+      sortByPhoneNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phoneNumber', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByRecordKey() {
+      sortByRecordKey() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'recordKey', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByRecordKeyDesc() {
+      sortByRecordKeyDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'recordKey', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByReportsFooter() {
+      sortByReportsFooter() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'reportsFooter', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByReportsFooterDesc() {
+      sortByReportsFooterDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'reportsFooter', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByUpdatedAt() {
+      sortByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  sortByUpdatedAtDesc() {
+      sortByUpdatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.desc);
     });
@@ -2743,182 +2239,182 @@ extension OrganizationInfoModelQuerySortBy
 extension OrganizationInfoModelQuerySortThenBy
     on QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QSortThenBy> {
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByAddress() {
+      thenByAddress() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'address', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByAddressDesc() {
+      thenByAddressDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'address', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByBranchName() {
+      thenByBranchName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'branchName', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByBranchNameDesc() {
+      thenByBranchNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'branchName', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByCreatedAt() {
+      thenByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createdAt', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByCreatedAtDesc() {
+      thenByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByDepartmentName() {
+      thenByDepartmentName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'departmentName', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByDepartmentNameDesc() {
+      thenByDepartmentNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'departmentName', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByEmail() {
+      thenByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByEmailDesc() {
+      thenByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenById() {
+      thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByIdDesc() {
+      thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByLogoPath() {
+      thenByLogoPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'logoPath', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByLogoPathDesc() {
+      thenByLogoPathDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'logoPath', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByMinistryName() {
+      thenByMinistryName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ministryName', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByMinistryNameDesc() {
+      thenByMinistryNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ministryName', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByOrganizationName() {
+      thenByOrganizationName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'organizationName', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByOrganizationNameDesc() {
+      thenByOrganizationNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'organizationName', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByPhoneNumber() {
+      thenByPhoneNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phoneNumber', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByPhoneNumberDesc() {
+      thenByPhoneNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phoneNumber', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByRecordKey() {
+      thenByRecordKey() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'recordKey', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByRecordKeyDesc() {
+      thenByRecordKeyDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'recordKey', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByReportsFooter() {
+      thenByReportsFooter() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'reportsFooter', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByReportsFooterDesc() {
+      thenByReportsFooterDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'reportsFooter', Sort.desc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByUpdatedAt() {
+      thenByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.asc);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QAfterSortBy>
-  thenByUpdatedAtDesc() {
+      thenByUpdatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.desc);
     });
@@ -2928,106 +2424,95 @@ extension OrganizationInfoModelQuerySortThenBy
 extension OrganizationInfoModelQueryWhereDistinct
     on QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct> {
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByAddress({bool caseSensitive = true}) {
+      distinctByAddress({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'address', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByBranchName({bool caseSensitive = true}) {
+      distinctByBranchName({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'branchName', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByCreatedAt() {
+      distinctByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'createdAt');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByDepartmentName({bool caseSensitive = true}) {
+      distinctByDepartmentName({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'departmentName',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'departmentName',
+          caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByEmail({bool caseSensitive = true}) {
+      distinctByEmail({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'email', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByLogoPath({bool caseSensitive = true}) {
+      distinctByLogoPath({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'logoPath', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByMinistryName({bool caseSensitive = true}) {
+      distinctByMinistryName({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'ministryName', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByOrganizationName({bool caseSensitive = true}) {
+      distinctByOrganizationName({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'organizationName',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'organizationName',
+          caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByPhoneNumber({bool caseSensitive = true}) {
+      distinctByPhoneNumber({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'phoneNumber', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByRecordKey({bool caseSensitive = true}) {
+      distinctByRecordKey({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'recordKey', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByReportsFooter({bool caseSensitive = true}) {
+      distinctByReportsFooter({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'reportsFooter',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'reportsFooter',
+          caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<OrganizationInfoModel, OrganizationInfoModel, QDistinct>
-  distinctByUpdatedAt() {
+      distinctByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'updatedAt');
     });
   }
 }
 
-extension OrganizationInfoModelQueryProperty
-    on
-        QueryBuilder<
-          OrganizationInfoModel,
-          OrganizationInfoModel,
-          QQueryProperty
-        > {
+extension OrganizationInfoModelQueryProperty on QueryBuilder<
+    OrganizationInfoModel, OrganizationInfoModel, QQueryProperty> {
   QueryBuilder<OrganizationInfoModel, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
@@ -3035,84 +2520,84 @@ extension OrganizationInfoModelQueryProperty
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  addressProperty() {
+      addressProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'address');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  branchNameProperty() {
+      branchNameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'branchName');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, DateTime, QQueryOperations>
-  createdAtProperty() {
+      createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdAt');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  departmentNameProperty() {
+      departmentNameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'departmentName');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  emailProperty() {
+      emailProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'email');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  logoPathProperty() {
+      logoPathProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'logoPath');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  ministryNameProperty() {
+      ministryNameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'ministryName');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  organizationNameProperty() {
+      organizationNameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'organizationName');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  phoneNumberProperty() {
+      phoneNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phoneNumber');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  recordKeyProperty() {
+      recordKeyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'recordKey');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, String, QQueryOperations>
-  reportsFooterProperty() {
+      reportsFooterProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'reportsFooter');
     });
   }
 
   QueryBuilder<OrganizationInfoModel, DateTime, QQueryOperations>
-  updatedAtProperty() {
+      updatedAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'updatedAt');
     });

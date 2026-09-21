@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class AppRoutes {
   const AppRoutes._();
 
+  static const String login = '/login';
   static const String dashboard = '/';
   static const String employees = '/employees';
   static const String employeeCreate = '/employees/create';
   static const String employeeEditPattern = '/employees/:employeeId/edit';
   static const String organization = '/organization';
   static const String reports = '/reports';
+  static const String users = '/users';
 
   static String employeeEdit(int employeeId) => '/employees/$employeeId/edit';
 }
@@ -51,5 +53,11 @@ const appNavigationItems = [
     subtitle: 'التقارير والطباعة والتصدير',
     path: AppRoutes.reports,
     icon: Icons.assessment_rounded,
+  ),
+  AppNavigationItem(
+    title: 'إدارة المستخدمين',
+    subtitle: 'إنشاء حسابات الدخول وتحديد الصلاحيات',
+    path: AppRoutes.users,
+    icon: Icons.manage_accounts_rounded,
   ),
 ];

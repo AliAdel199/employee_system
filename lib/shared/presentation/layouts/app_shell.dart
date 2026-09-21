@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/router/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../features/auth/auth.dart';
 
-class AppShell extends StatelessWidget {
+class AppShell extends ConsumerWidget {
   const AppShell({
     super.key,
     required this.currentLocation,
@@ -16,9 +18,19 @@ class AppShell extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(currentUserProvider);
+    final isAdmin = currentUser?.role == UserRole.admin;
+    final visibleNavigationItems = appNavigationItems
+        .where((item) => item.path != AppRoutes.users || isAdmin)
+        .toList();
+
     final selectedItem = _selectedItem;
     final isCompact = MediaQuery.sizeOf(context).width < 1100;
+
+    void logout() {
+      ref.read(currentUserProvider.notifier).logout();
+    }
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -27,6 +39,7 @@ class AppShell extends StatelessWidget {
               child: SafeArea(
                 child: _SidebarContent(
                   currentLocation: currentLocation,
+                  navigationItems: visibleNavigationItems,
                   onDestinationSelected: (path) {
                     Navigator.of(context).pop();
                     context.go(path);
@@ -45,6 +58,7 @@ class AppShell extends StatelessWidget {
                   width: 300,
                   child: _SidebarContent(
                     currentLocation: currentLocation,
+                    navigationItems: visibleNavigationItems,
                     onDestinationSelected: context.go,
                   ),
                 ),
@@ -58,6 +72,9 @@ class AppShell extends StatelessWidget {
                       title: selectedItem.title,
                       subtitle: selectedItem.subtitle,
                       showMenuButton: isCompact,
+                      userFullName: currentUser?.fullName ?? '',
+                      userRoleLabel: currentUser?.role.label ?? '',
+                      onLogout: logout,
                     ),
                     const SizedBox(height: 18),
                     Expanded(
@@ -99,11 +116,17 @@ class _ShellHeader extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.showMenuButton,
+    required this.userFullName,
+    required this.userRoleLabel,
+    required this.onLogout,
   });
 
   final String title;
   final String subtitle;
   final bool showMenuButton;
+  final String userFullName;
+  final String userRoleLabel;
+  final VoidCallback onLogout;
 
   @override
   Widget build(BuildContext context) {
@@ -137,31 +160,54 @@ class _ShellHeader extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            decoration: BoxDecoration(
-              color: AppColors.background,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.desktop_windows_rounded,
-                  color: AppColors.primary,
-                  size: 18,
-                ),
-                SizedBox(width: 8),
-                Text(
-                  'نسخة سطح المكتب',
-                  style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w600,
+          if (userFullName.isNotEmpty) ...[
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.account_circle_rounded,
+                    color: AppColors.primary,
+                    size: 18,
                   ),
-                ),
-              ],
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        userFullName,
+                        style: const TextStyle(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Text(
+                        userRoleLabel,
+                        style: const TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
+            const SizedBox(width: 8),
+            IconButton(
+              onPressed: onLogout,
+              icon: const Icon(Icons.logout_rounded),
+              tooltip: 'تسجيل الخروج',
+              color: AppColors.textSecondary,
+            ),
+          ],
         ],
       ),
     );
@@ -171,10 +217,12 @@ class _ShellHeader extends StatelessWidget {
 class _SidebarContent extends StatelessWidget {
   const _SidebarContent({
     required this.currentLocation,
+    required this.navigationItems,
     required this.onDestinationSelected,
   });
 
   final String currentLocation;
+  final List<AppNavigationItem> navigationItems;
   final ValueChanged<String> onDestinationSelected;
 
   @override
@@ -238,7 +286,7 @@ class _SidebarContent extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) {
-                final item = appNavigationItems[index];
+                final item = navigationItems[index];
                 final isSelected = _matchesPath(item.path, currentLocation);
 
                 return _SidebarDestinationTile(
@@ -248,7 +296,7 @@ class _SidebarContent extends StatelessWidget {
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(height: 8),
-              itemCount: appNavigationItems.length,
+              itemCount: navigationItems.length,
             ),
           ),
           const SizedBox(height: 12),

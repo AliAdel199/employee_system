@@ -17,7 +17,11 @@ const EmployeeModelSchema = CollectionSchema(
   name: r'EmployeeModel',
   id: 8017048509502787200,
   properties: {
-    r'address': PropertySchema(id: 0, name: r'address', type: IsarType.string),
+    r'address': PropertySchema(
+      id: 0,
+      name: r'address',
+      type: IsarType.string,
+    ),
     r'birthDate': PropertySchema(
       id: 1,
       name: r'birthDate',
@@ -125,7 +129,7 @@ const EmployeeModelSchema = CollectionSchema(
       id: 21,
       name: r'updatedAt',
       type: IsarType.dateTime,
-    ),
+    )
   },
   estimateSize: _employeeModelEstimateSize,
   serialize: _employeeModelSerialize,
@@ -143,7 +147,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'fullName',
           type: IndexType.value,
           caseSensitive: false,
-        ),
+        )
       ],
     ),
     r'phoneNumber': IndexSchema(
@@ -156,7 +160,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'phoneNumber',
           type: IndexType.value,
           caseSensitive: true,
-        ),
+        )
       ],
     ),
     r'nationalNumber': IndexSchema(
@@ -169,7 +173,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'nationalNumber',
           type: IndexType.value,
           caseSensitive: true,
-        ),
+        )
       ],
     ),
     r'nationalCardNumber': IndexSchema(
@@ -182,7 +186,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'nationalCardNumber',
           type: IndexType.value,
           caseSensitive: true,
-        ),
+        )
       ],
     ),
     r'housingCardNumber': IndexSchema(
@@ -195,7 +199,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'housingCardNumber',
           type: IndexType.value,
           caseSensitive: true,
-        ),
+        )
       ],
     ),
     r'employeeNumber': IndexSchema(
@@ -208,7 +212,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'employeeNumber',
           type: IndexType.value,
           caseSensitive: true,
-        ),
+        )
       ],
     ),
     r'jobTitle': IndexSchema(
@@ -221,7 +225,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'jobTitle',
           type: IndexType.value,
           caseSensitive: false,
-        ),
+        )
       ],
     ),
     r'currentWorkplace': IndexSchema(
@@ -234,7 +238,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'currentWorkplace',
           type: IndexType.value,
           caseSensitive: false,
-        ),
+        )
       ],
     ),
     r'previousWorkplace': IndexSchema(
@@ -247,7 +251,7 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'previousWorkplace',
           type: IndexType.value,
           caseSensitive: false,
-        ),
+        )
       ],
     ),
     r'createdAt': IndexSchema(
@@ -260,9 +264,9 @@ const EmployeeModelSchema = CollectionSchema(
           name: r'createdAt',
           type: IndexType.value,
           caseSensitive: false,
-        ),
+        )
       ],
-    ),
+    )
   },
   links: {},
   embeddedSchemas: {},
@@ -358,10 +362,8 @@ EmployeeModel _employeeModelDeserialize(
   object.currentWorkplace = reader.readString(offsets[4]);
   object.documentsIssueAuthority = reader.readString(offsets[5]);
   object.documentsIssueDate = reader.readDateTimeOrNull(offsets[6]);
-  object.educationLevel =
-      _EmployeeModeleducationLevelValueEnumMap[reader.readStringOrNull(
-        offsets[7],
-      )];
+  object.educationLevel = _EmployeeModeleducationLevelValueEnumMap[
+      reader.readStringOrNull(offsets[7])];
   object.employeeNumber = reader.readString(offsets[8]);
   object.fullName = reader.readString(offsets[9]);
   object.gender =
@@ -371,10 +373,8 @@ EmployeeModel _employeeModelDeserialize(
   object.id = id;
   object.jobNotes = reader.readString(offsets[13]);
   object.jobTitle = reader.readString(offsets[14]);
-  object.maritalStatus =
-      _EmployeeModelmaritalStatusValueEnumMap[reader.readStringOrNull(
-        offsets[15],
-      )];
+  object.maritalStatus = _EmployeeModelmaritalStatusValueEnumMap[
+      reader.readStringOrNull(offsets[15])];
   object.nationalCardNumber = reader.readString(offsets[16]);
   object.nationalNumber = reader.readString(offsets[17]);
   object.phoneNumber = reader.readString(offsets[18]);
@@ -406,10 +406,8 @@ P _employeeModelDeserializeProp<P>(
     case 6:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 7:
-      return (_EmployeeModeleducationLevelValueEnumMap[reader.readStringOrNull(
-            offset,
-          )])
-          as P;
+      return (_EmployeeModeleducationLevelValueEnumMap[
+          reader.readStringOrNull(offset)]) as P;
     case 8:
       return (reader.readString(offset)) as P;
     case 9:
@@ -426,10 +424,8 @@ P _employeeModelDeserializeProp<P>(
     case 14:
       return (reader.readString(offset)) as P;
     case 15:
-      return (_EmployeeModelmaritalStatusValueEnumMap[reader.readStringOrNull(
-            offset,
-          )])
-          as P;
+      return (_EmployeeModelmaritalStatusValueEnumMap[
+          reader.readStringOrNull(offset)]) as P;
     case 16:
       return (reader.readString(offset)) as P;
     case 17:
@@ -497,10 +493,7 @@ List<IsarLinkBase<dynamic>> _employeeModelGetLinks(EmployeeModel object) {
 }
 
 void _employeeModelAttach(
-  IsarCollection<dynamic> col,
-  Id id,
-  EmployeeModel object,
-) {
+    IsarCollection<dynamic> col, Id id, EmployeeModel object) {
   object.id = id;
 }
 
@@ -537,7 +530,7 @@ extension EmployeeModelQueryWhereSort
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhere>
-  anyNationalCardNumber() {
+      anyNationalCardNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'nationalCardNumber'),
@@ -546,7 +539,7 @@ extension EmployeeModelQueryWhereSort
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhere>
-  anyHousingCardNumber() {
+      anyHousingCardNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'housingCardNumber'),
@@ -571,7 +564,7 @@ extension EmployeeModelQueryWhereSort
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhere>
-  anyCurrentWorkplace() {
+      anyCurrentWorkplace() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'currentWorkplace'),
@@ -580,7 +573,7 @@ extension EmployeeModelQueryWhereSort
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhere>
-  anyPreviousWorkplace() {
+      anyPreviousWorkplace() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'previousWorkplace'),
@@ -600,16 +593,17 @@ extension EmployeeModelQueryWhereSort
 extension EmployeeModelQueryWhere
     on QueryBuilder<EmployeeModel, EmployeeModel, QWhereClause> {
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause> idEqualTo(
-    Id id,
-  ) {
+      Id id) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
+      return query.addWhereClause(IdWhereClause.between(
+        lower: id,
+        upper: id,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause> idNotEqualTo(
-    Id id,
-  ) {
+      Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -632,9 +626,8 @@ extension EmployeeModelQueryWhere
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause> idGreaterThan(
-    Id id, {
-    bool include = false,
-  }) {
+      Id id,
+      {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -643,9 +636,8 @@ extension EmployeeModelQueryWhere
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause> idLessThan(
-    Id id, {
-    bool include = false,
-  }) {
+      Id id,
+      {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -660,95 +652,87 @@ extension EmployeeModelQueryWhere
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IdWhereClause.between(
-          lower: lowerId,
-          includeLower: includeLower,
-          upper: upperId,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IdWhereClause.between(
+        lower: lowerId,
+        includeLower: includeLower,
+        upper: upperId,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause> fullNameEqualTo(
-    String fullName,
-  ) {
+      String fullName) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'fullName', value: [fullName]),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'fullName',
+        value: [fullName],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  fullNameNotEqualTo(String fullName) {
+      fullNameNotEqualTo(String fullName) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'fullName',
-                lower: [],
-                upper: [fullName],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'fullName',
-                lower: [fullName],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'fullName',
+              lower: [],
+              upper: [fullName],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'fullName',
+              lower: [fullName],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'fullName',
-                lower: [fullName],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'fullName',
-                lower: [],
-                upper: [fullName],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'fullName',
+              lower: [fullName],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'fullName',
+              lower: [],
+              upper: [fullName],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  fullNameGreaterThan(String fullName, {bool include = false}) {
+      fullNameGreaterThan(
+    String fullName, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'fullName',
-          lower: [fullName],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'fullName',
+        lower: [fullName],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  fullNameLessThan(String fullName, {bool include = false}) {
+      fullNameLessThan(
+    String fullName, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'fullName',
-          lower: [],
-          upper: [fullName],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'fullName',
+        lower: [],
+        upper: [fullName],
+        includeUpper: include,
+      ));
     });
   }
 
@@ -759,944 +743,841 @@ extension EmployeeModelQueryWhere
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'fullName',
-          lower: [lowerFullName],
-          includeLower: includeLower,
-          upper: [upperFullName],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'fullName',
+        lower: [lowerFullName],
+        includeLower: includeLower,
+        upper: [upperFullName],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  fullNameStartsWith(String FullNamePrefix) {
+      fullNameStartsWith(String FullNamePrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'fullName',
-          lower: [FullNamePrefix],
-          upper: ['$FullNamePrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'fullName',
+        lower: [FullNamePrefix],
+        upper: ['$FullNamePrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  fullNameIsEmpty() {
+      fullNameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'fullName', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'fullName',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  fullNameIsNotEmpty() {
+      fullNameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(indexName: r'fullName', upper: ['']),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(indexName: r'fullName', lower: ['']),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'fullName',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'fullName',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(indexName: r'fullName', lower: ['']),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(indexName: r'fullName', upper: ['']),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'fullName',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'fullName',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  phoneNumberEqualTo(String phoneNumber) {
+      phoneNumberEqualTo(String phoneNumber) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(
-          indexName: r'phoneNumber',
-          value: [phoneNumber],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'phoneNumber',
+        value: [phoneNumber],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  phoneNumberNotEqualTo(String phoneNumber) {
+      phoneNumberNotEqualTo(String phoneNumber) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'phoneNumber',
-                lower: [],
-                upper: [phoneNumber],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'phoneNumber',
-                lower: [phoneNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'phoneNumber',
+              lower: [],
+              upper: [phoneNumber],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'phoneNumber',
+              lower: [phoneNumber],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'phoneNumber',
-                lower: [phoneNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'phoneNumber',
-                lower: [],
-                upper: [phoneNumber],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'phoneNumber',
+              lower: [phoneNumber],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'phoneNumber',
+              lower: [],
+              upper: [phoneNumber],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  phoneNumberGreaterThan(String phoneNumber, {bool include = false}) {
+      phoneNumberGreaterThan(
+    String phoneNumber, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'phoneNumber',
-          lower: [phoneNumber],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'phoneNumber',
+        lower: [phoneNumber],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  phoneNumberLessThan(String phoneNumber, {bool include = false}) {
+      phoneNumberLessThan(
+    String phoneNumber, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'phoneNumber',
-          lower: [],
-          upper: [phoneNumber],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'phoneNumber',
+        lower: [],
+        upper: [phoneNumber],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  phoneNumberBetween(
+      phoneNumberBetween(
     String lowerPhoneNumber,
     String upperPhoneNumber, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'phoneNumber',
-          lower: [lowerPhoneNumber],
-          includeLower: includeLower,
-          upper: [upperPhoneNumber],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'phoneNumber',
+        lower: [lowerPhoneNumber],
+        includeLower: includeLower,
+        upper: [upperPhoneNumber],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  phoneNumberStartsWith(String PhoneNumberPrefix) {
+      phoneNumberStartsWith(String PhoneNumberPrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'phoneNumber',
-          lower: [PhoneNumberPrefix],
-          upper: ['$PhoneNumberPrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'phoneNumber',
+        lower: [PhoneNumberPrefix],
+        upper: ['$PhoneNumberPrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  phoneNumberIsEmpty() {
+      phoneNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'phoneNumber', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'phoneNumber',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  phoneNumberIsNotEmpty() {
+      phoneNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(indexName: r'phoneNumber', upper: ['']),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'phoneNumber',
-                lower: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'phoneNumber',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'phoneNumber',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'phoneNumber',
-                lower: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(indexName: r'phoneNumber', upper: ['']),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'phoneNumber',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'phoneNumber',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalNumberEqualTo(String nationalNumber) {
+      nationalNumberEqualTo(String nationalNumber) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(
-          indexName: r'nationalNumber',
-          value: [nationalNumber],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'nationalNumber',
+        value: [nationalNumber],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalNumberNotEqualTo(String nationalNumber) {
+      nationalNumberNotEqualTo(String nationalNumber) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'nationalNumber',
-                lower: [],
-                upper: [nationalNumber],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'nationalNumber',
-                lower: [nationalNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'nationalNumber',
+              lower: [],
+              upper: [nationalNumber],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'nationalNumber',
+              lower: [nationalNumber],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'nationalNumber',
-                lower: [nationalNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'nationalNumber',
-                lower: [],
-                upper: [nationalNumber],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'nationalNumber',
+              lower: [nationalNumber],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'nationalNumber',
+              lower: [],
+              upper: [nationalNumber],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalNumberGreaterThan(String nationalNumber, {bool include = false}) {
+      nationalNumberGreaterThan(
+    String nationalNumber, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'nationalNumber',
-          lower: [nationalNumber],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'nationalNumber',
+        lower: [nationalNumber],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalNumberLessThan(String nationalNumber, {bool include = false}) {
+      nationalNumberLessThan(
+    String nationalNumber, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'nationalNumber',
-          lower: [],
-          upper: [nationalNumber],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'nationalNumber',
+        lower: [],
+        upper: [nationalNumber],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalNumberBetween(
+      nationalNumberBetween(
     String lowerNationalNumber,
     String upperNationalNumber, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'nationalNumber',
-          lower: [lowerNationalNumber],
-          includeLower: includeLower,
-          upper: [upperNationalNumber],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'nationalNumber',
+        lower: [lowerNationalNumber],
+        includeLower: includeLower,
+        upper: [upperNationalNumber],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalNumberStartsWith(String NationalNumberPrefix) {
+      nationalNumberStartsWith(String NationalNumberPrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'nationalNumber',
-          lower: [NationalNumberPrefix],
-          upper: ['$NationalNumberPrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'nationalNumber',
+        lower: [NationalNumberPrefix],
+        upper: ['$NationalNumberPrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalNumberIsEmpty() {
+      nationalNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'nationalNumber', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'nationalNumber',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalNumberIsNotEmpty() {
+      nationalNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'nationalNumber',
-                upper: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'nationalNumber',
-                lower: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'nationalNumber',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'nationalNumber',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'nationalNumber',
-                lower: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'nationalNumber',
-                upper: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'nationalNumber',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'nationalNumber',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalCardNumberEqualTo(String nationalCardNumber) {
+      nationalCardNumberEqualTo(String nationalCardNumber) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(
-          indexName: r'nationalCardNumber',
-          value: [nationalCardNumber],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'nationalCardNumber',
+        value: [nationalCardNumber],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalCardNumberNotEqualTo(String nationalCardNumber) {
+      nationalCardNumberNotEqualTo(String nationalCardNumber) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'nationalCardNumber',
-                lower: [],
-                upper: [nationalCardNumber],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'nationalCardNumber',
-                lower: [nationalCardNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'nationalCardNumber',
+              lower: [],
+              upper: [nationalCardNumber],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'nationalCardNumber',
+              lower: [nationalCardNumber],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'nationalCardNumber',
-                lower: [nationalCardNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'nationalCardNumber',
-                lower: [],
-                upper: [nationalCardNumber],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'nationalCardNumber',
+              lower: [nationalCardNumber],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'nationalCardNumber',
+              lower: [],
+              upper: [nationalCardNumber],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalCardNumberGreaterThan(
+      nationalCardNumberGreaterThan(
     String nationalCardNumber, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'nationalCardNumber',
-          lower: [nationalCardNumber],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'nationalCardNumber',
+        lower: [nationalCardNumber],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalCardNumberLessThan(
+      nationalCardNumberLessThan(
     String nationalCardNumber, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'nationalCardNumber',
-          lower: [],
-          upper: [nationalCardNumber],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'nationalCardNumber',
+        lower: [],
+        upper: [nationalCardNumber],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalCardNumberBetween(
+      nationalCardNumberBetween(
     String lowerNationalCardNumber,
     String upperNationalCardNumber, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'nationalCardNumber',
-          lower: [lowerNationalCardNumber],
-          includeLower: includeLower,
-          upper: [upperNationalCardNumber],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'nationalCardNumber',
+        lower: [lowerNationalCardNumber],
+        includeLower: includeLower,
+        upper: [upperNationalCardNumber],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalCardNumberStartsWith(String NationalCardNumberPrefix) {
+      nationalCardNumberStartsWith(String NationalCardNumberPrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'nationalCardNumber',
-          lower: [NationalCardNumberPrefix],
-          upper: ['$NationalCardNumberPrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'nationalCardNumber',
+        lower: [NationalCardNumberPrefix],
+        upper: ['$NationalCardNumberPrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalCardNumberIsEmpty() {
+      nationalCardNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'nationalCardNumber', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'nationalCardNumber',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  nationalCardNumberIsNotEmpty() {
+      nationalCardNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'nationalCardNumber',
-                upper: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'nationalCardNumber',
-                lower: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'nationalCardNumber',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'nationalCardNumber',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'nationalCardNumber',
-                lower: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'nationalCardNumber',
-                upper: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'nationalCardNumber',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'nationalCardNumber',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  housingCardNumberEqualTo(String housingCardNumber) {
+      housingCardNumberEqualTo(String housingCardNumber) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(
-          indexName: r'housingCardNumber',
-          value: [housingCardNumber],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'housingCardNumber',
+        value: [housingCardNumber],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  housingCardNumberNotEqualTo(String housingCardNumber) {
+      housingCardNumberNotEqualTo(String housingCardNumber) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'housingCardNumber',
-                lower: [],
-                upper: [housingCardNumber],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'housingCardNumber',
-                lower: [housingCardNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'housingCardNumber',
+              lower: [],
+              upper: [housingCardNumber],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'housingCardNumber',
+              lower: [housingCardNumber],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'housingCardNumber',
-                lower: [housingCardNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'housingCardNumber',
-                lower: [],
-                upper: [housingCardNumber],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'housingCardNumber',
+              lower: [housingCardNumber],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'housingCardNumber',
+              lower: [],
+              upper: [housingCardNumber],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  housingCardNumberGreaterThan(
+      housingCardNumberGreaterThan(
     String housingCardNumber, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'housingCardNumber',
-          lower: [housingCardNumber],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'housingCardNumber',
+        lower: [housingCardNumber],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  housingCardNumberLessThan(String housingCardNumber, {bool include = false}) {
+      housingCardNumberLessThan(
+    String housingCardNumber, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'housingCardNumber',
-          lower: [],
-          upper: [housingCardNumber],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'housingCardNumber',
+        lower: [],
+        upper: [housingCardNumber],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  housingCardNumberBetween(
+      housingCardNumberBetween(
     String lowerHousingCardNumber,
     String upperHousingCardNumber, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'housingCardNumber',
-          lower: [lowerHousingCardNumber],
-          includeLower: includeLower,
-          upper: [upperHousingCardNumber],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'housingCardNumber',
+        lower: [lowerHousingCardNumber],
+        includeLower: includeLower,
+        upper: [upperHousingCardNumber],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  housingCardNumberStartsWith(String HousingCardNumberPrefix) {
+      housingCardNumberStartsWith(String HousingCardNumberPrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'housingCardNumber',
-          lower: [HousingCardNumberPrefix],
-          upper: ['$HousingCardNumberPrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'housingCardNumber',
+        lower: [HousingCardNumberPrefix],
+        upper: ['$HousingCardNumberPrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  housingCardNumberIsEmpty() {
+      housingCardNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'housingCardNumber', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'housingCardNumber',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  housingCardNumberIsNotEmpty() {
+      housingCardNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'housingCardNumber',
-                upper: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'housingCardNumber',
-                lower: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'housingCardNumber',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'housingCardNumber',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'housingCardNumber',
-                lower: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'housingCardNumber',
-                upper: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'housingCardNumber',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'housingCardNumber',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  employeeNumberEqualTo(String employeeNumber) {
+      employeeNumberEqualTo(String employeeNumber) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(
-          indexName: r'employeeNumber',
-          value: [employeeNumber],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'employeeNumber',
+        value: [employeeNumber],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  employeeNumberNotEqualTo(String employeeNumber) {
+      employeeNumberNotEqualTo(String employeeNumber) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'employeeNumber',
-                lower: [],
-                upper: [employeeNumber],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'employeeNumber',
-                lower: [employeeNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'employeeNumber',
+              lower: [],
+              upper: [employeeNumber],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'employeeNumber',
+              lower: [employeeNumber],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'employeeNumber',
-                lower: [employeeNumber],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'employeeNumber',
-                lower: [],
-                upper: [employeeNumber],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'employeeNumber',
+              lower: [employeeNumber],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'employeeNumber',
+              lower: [],
+              upper: [employeeNumber],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  employeeNumberGreaterThan(String employeeNumber, {bool include = false}) {
+      employeeNumberGreaterThan(
+    String employeeNumber, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'employeeNumber',
-          lower: [employeeNumber],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'employeeNumber',
+        lower: [employeeNumber],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  employeeNumberLessThan(String employeeNumber, {bool include = false}) {
+      employeeNumberLessThan(
+    String employeeNumber, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'employeeNumber',
-          lower: [],
-          upper: [employeeNumber],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'employeeNumber',
+        lower: [],
+        upper: [employeeNumber],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  employeeNumberBetween(
+      employeeNumberBetween(
     String lowerEmployeeNumber,
     String upperEmployeeNumber, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'employeeNumber',
-          lower: [lowerEmployeeNumber],
-          includeLower: includeLower,
-          upper: [upperEmployeeNumber],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'employeeNumber',
+        lower: [lowerEmployeeNumber],
+        includeLower: includeLower,
+        upper: [upperEmployeeNumber],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  employeeNumberStartsWith(String EmployeeNumberPrefix) {
+      employeeNumberStartsWith(String EmployeeNumberPrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'employeeNumber',
-          lower: [EmployeeNumberPrefix],
-          upper: ['$EmployeeNumberPrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'employeeNumber',
+        lower: [EmployeeNumberPrefix],
+        upper: ['$EmployeeNumberPrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  employeeNumberIsEmpty() {
+      employeeNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'employeeNumber', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'employeeNumber',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  employeeNumberIsNotEmpty() {
+      employeeNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'employeeNumber',
-                upper: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'employeeNumber',
-                lower: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'employeeNumber',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'employeeNumber',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'employeeNumber',
-                lower: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'employeeNumber',
-                upper: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'employeeNumber',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'employeeNumber',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause> jobTitleEqualTo(
-    String jobTitle,
-  ) {
+      String jobTitle) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'jobTitle', value: [jobTitle]),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'jobTitle',
+        value: [jobTitle],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  jobTitleNotEqualTo(String jobTitle) {
+      jobTitleNotEqualTo(String jobTitle) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'jobTitle',
-                lower: [],
-                upper: [jobTitle],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'jobTitle',
-                lower: [jobTitle],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'jobTitle',
+              lower: [],
+              upper: [jobTitle],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'jobTitle',
+              lower: [jobTitle],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'jobTitle',
-                lower: [jobTitle],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'jobTitle',
-                lower: [],
-                upper: [jobTitle],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'jobTitle',
+              lower: [jobTitle],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'jobTitle',
+              lower: [],
+              upper: [jobTitle],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  jobTitleGreaterThan(String jobTitle, {bool include = false}) {
+      jobTitleGreaterThan(
+    String jobTitle, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'jobTitle',
-          lower: [jobTitle],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'jobTitle',
+        lower: [jobTitle],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  jobTitleLessThan(String jobTitle, {bool include = false}) {
+      jobTitleLessThan(
+    String jobTitle, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'jobTitle',
-          lower: [],
-          upper: [jobTitle],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'jobTitle',
+        lower: [],
+        upper: [jobTitle],
+        includeUpper: include,
+      ));
     });
   }
 
@@ -1707,483 +1588,436 @@ extension EmployeeModelQueryWhere
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'jobTitle',
-          lower: [lowerJobTitle],
-          includeLower: includeLower,
-          upper: [upperJobTitle],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'jobTitle',
+        lower: [lowerJobTitle],
+        includeLower: includeLower,
+        upper: [upperJobTitle],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  jobTitleStartsWith(String JobTitlePrefix) {
+      jobTitleStartsWith(String JobTitlePrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'jobTitle',
-          lower: [JobTitlePrefix],
-          upper: ['$JobTitlePrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'jobTitle',
+        lower: [JobTitlePrefix],
+        upper: ['$JobTitlePrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  jobTitleIsEmpty() {
+      jobTitleIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'jobTitle', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'jobTitle',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  jobTitleIsNotEmpty() {
+      jobTitleIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(indexName: r'jobTitle', upper: ['']),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(indexName: r'jobTitle', lower: ['']),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'jobTitle',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'jobTitle',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(indexName: r'jobTitle', lower: ['']),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(indexName: r'jobTitle', upper: ['']),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'jobTitle',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'jobTitle',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  currentWorkplaceEqualTo(String currentWorkplace) {
+      currentWorkplaceEqualTo(String currentWorkplace) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(
-          indexName: r'currentWorkplace',
-          value: [currentWorkplace],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'currentWorkplace',
+        value: [currentWorkplace],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  currentWorkplaceNotEqualTo(String currentWorkplace) {
+      currentWorkplaceNotEqualTo(String currentWorkplace) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'currentWorkplace',
-                lower: [],
-                upper: [currentWorkplace],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'currentWorkplace',
-                lower: [currentWorkplace],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'currentWorkplace',
+              lower: [],
+              upper: [currentWorkplace],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'currentWorkplace',
+              lower: [currentWorkplace],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'currentWorkplace',
-                lower: [currentWorkplace],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'currentWorkplace',
-                lower: [],
-                upper: [currentWorkplace],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'currentWorkplace',
+              lower: [currentWorkplace],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'currentWorkplace',
+              lower: [],
+              upper: [currentWorkplace],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  currentWorkplaceGreaterThan(String currentWorkplace, {bool include = false}) {
+      currentWorkplaceGreaterThan(
+    String currentWorkplace, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'currentWorkplace',
-          lower: [currentWorkplace],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'currentWorkplace',
+        lower: [currentWorkplace],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  currentWorkplaceLessThan(String currentWorkplace, {bool include = false}) {
+      currentWorkplaceLessThan(
+    String currentWorkplace, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'currentWorkplace',
-          lower: [],
-          upper: [currentWorkplace],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'currentWorkplace',
+        lower: [],
+        upper: [currentWorkplace],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  currentWorkplaceBetween(
+      currentWorkplaceBetween(
     String lowerCurrentWorkplace,
     String upperCurrentWorkplace, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'currentWorkplace',
-          lower: [lowerCurrentWorkplace],
-          includeLower: includeLower,
-          upper: [upperCurrentWorkplace],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'currentWorkplace',
+        lower: [lowerCurrentWorkplace],
+        includeLower: includeLower,
+        upper: [upperCurrentWorkplace],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  currentWorkplaceStartsWith(String CurrentWorkplacePrefix) {
+      currentWorkplaceStartsWith(String CurrentWorkplacePrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'currentWorkplace',
-          lower: [CurrentWorkplacePrefix],
-          upper: ['$CurrentWorkplacePrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'currentWorkplace',
+        lower: [CurrentWorkplacePrefix],
+        upper: ['$CurrentWorkplacePrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  currentWorkplaceIsEmpty() {
+      currentWorkplaceIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'currentWorkplace', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'currentWorkplace',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  currentWorkplaceIsNotEmpty() {
+      currentWorkplaceIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'currentWorkplace',
-                upper: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'currentWorkplace',
-                lower: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'currentWorkplace',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'currentWorkplace',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'currentWorkplace',
-                lower: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'currentWorkplace',
-                upper: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'currentWorkplace',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'currentWorkplace',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  previousWorkplaceEqualTo(String previousWorkplace) {
+      previousWorkplaceEqualTo(String previousWorkplace) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(
-          indexName: r'previousWorkplace',
-          value: [previousWorkplace],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'previousWorkplace',
+        value: [previousWorkplace],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  previousWorkplaceNotEqualTo(String previousWorkplace) {
+      previousWorkplaceNotEqualTo(String previousWorkplace) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'previousWorkplace',
-                lower: [],
-                upper: [previousWorkplace],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'previousWorkplace',
-                lower: [previousWorkplace],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'previousWorkplace',
+              lower: [],
+              upper: [previousWorkplace],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'previousWorkplace',
+              lower: [previousWorkplace],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'previousWorkplace',
-                lower: [previousWorkplace],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'previousWorkplace',
-                lower: [],
-                upper: [previousWorkplace],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'previousWorkplace',
+              lower: [previousWorkplace],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'previousWorkplace',
+              lower: [],
+              upper: [previousWorkplace],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  previousWorkplaceGreaterThan(
+      previousWorkplaceGreaterThan(
     String previousWorkplace, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'previousWorkplace',
-          lower: [previousWorkplace],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'previousWorkplace',
+        lower: [previousWorkplace],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  previousWorkplaceLessThan(String previousWorkplace, {bool include = false}) {
+      previousWorkplaceLessThan(
+    String previousWorkplace, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'previousWorkplace',
-          lower: [],
-          upper: [previousWorkplace],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'previousWorkplace',
+        lower: [],
+        upper: [previousWorkplace],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  previousWorkplaceBetween(
+      previousWorkplaceBetween(
     String lowerPreviousWorkplace,
     String upperPreviousWorkplace, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'previousWorkplace',
-          lower: [lowerPreviousWorkplace],
-          includeLower: includeLower,
-          upper: [upperPreviousWorkplace],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'previousWorkplace',
+        lower: [lowerPreviousWorkplace],
+        includeLower: includeLower,
+        upper: [upperPreviousWorkplace],
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  previousWorkplaceStartsWith(String PreviousWorkplacePrefix) {
+      previousWorkplaceStartsWith(String PreviousWorkplacePrefix) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'previousWorkplace',
-          lower: [PreviousWorkplacePrefix],
-          upper: ['$PreviousWorkplacePrefix\u{FFFFF}'],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'previousWorkplace',
+        lower: [PreviousWorkplacePrefix],
+        upper: ['$PreviousWorkplacePrefix\u{FFFFF}'],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  previousWorkplaceIsEmpty() {
+      previousWorkplaceIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'previousWorkplace', value: ['']),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'previousWorkplace',
+        value: [''],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  previousWorkplaceIsNotEmpty() {
+      previousWorkplaceIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'previousWorkplace',
-                upper: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'previousWorkplace',
-                lower: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'previousWorkplace',
+              upper: [''],
+            ))
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'previousWorkplace',
+              lower: [''],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.greaterThan(
-                indexName: r'previousWorkplace',
-                lower: [''],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.lessThan(
-                indexName: r'previousWorkplace',
-                upper: [''],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.greaterThan(
+              indexName: r'previousWorkplace',
+              lower: [''],
+            ))
+            .addWhereClause(IndexWhereClause.lessThan(
+              indexName: r'previousWorkplace',
+              upper: [''],
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  createdAtEqualTo(DateTime createdAt) {
+      createdAtEqualTo(DateTime createdAt) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.equalTo(indexName: r'createdAt', value: [createdAt]),
-      );
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'createdAt',
+        value: [createdAt],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  createdAtNotEqualTo(DateTime createdAt) {
+      createdAtNotEqualTo(DateTime createdAt) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'createdAt',
-                lower: [],
-                upper: [createdAt],
-                includeUpper: false,
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'createdAt',
-                lower: [createdAt],
-                includeLower: false,
-                upper: [],
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createdAt',
+              lower: [],
+              upper: [createdAt],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createdAt',
+              lower: [createdAt],
+              includeLower: false,
+              upper: [],
+            ));
       } else {
         return query
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'createdAt',
-                lower: [createdAt],
-                includeLower: false,
-                upper: [],
-              ),
-            )
-            .addWhereClause(
-              IndexWhereClause.between(
-                indexName: r'createdAt',
-                lower: [],
-                upper: [createdAt],
-                includeUpper: false,
-              ),
-            );
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createdAt',
+              lower: [createdAt],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createdAt',
+              lower: [],
+              upper: [createdAt],
+              includeUpper: false,
+            ));
       }
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  createdAtGreaterThan(DateTime createdAt, {bool include = false}) {
+      createdAtGreaterThan(
+    DateTime createdAt, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'createdAt',
-          lower: [createdAt],
-          includeLower: include,
-          upper: [],
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createdAt',
+        lower: [createdAt],
+        includeLower: include,
+        upper: [],
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  createdAtLessThan(DateTime createdAt, {bool include = false}) {
+      createdAtLessThan(
+    DateTime createdAt, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'createdAt',
-          lower: [],
-          upper: [createdAt],
-          includeUpper: include,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createdAt',
+        lower: [],
+        upper: [createdAt],
+        includeUpper: include,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterWhereClause>
-  createdAtBetween(
+      createdAtBetween(
     DateTime lowerCreatedAt,
     DateTime upperCreatedAt, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IndexWhereClause.between(
-          indexName: r'createdAt',
-          lower: [lowerCreatedAt],
-          includeLower: includeLower,
-          upper: [upperCreatedAt],
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createdAt',
+        lower: [lowerCreatedAt],
+        includeLower: includeLower,
+        upper: [upperCreatedAt],
+        includeUpper: includeUpper,
+      ));
     });
   }
 }
@@ -2191,56 +2025,53 @@ extension EmployeeModelQueryWhere
 extension EmployeeModelQueryFilter
     on QueryBuilder<EmployeeModel, EmployeeModel, QFilterCondition> {
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressEqualTo(String value, {bool caseSensitive = true}) {
+      addressEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressGreaterThan(
+      addressGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressLessThan(
+      addressLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressBetween(
+      addressBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2248,213 +2079,209 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'address',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'address',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressStartsWith(String value, {bool caseSensitive = true}) {
+      addressStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressEndsWith(String value, {bool caseSensitive = true}) {
+      addressEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressContains(String value, {bool caseSensitive = true}) {
+      addressContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'address',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'address',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressMatches(String pattern, {bool caseSensitive = true}) {
+      addressMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'address',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'address',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressIsEmpty() {
+      addressIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'address', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'address',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  addressIsNotEmpty() {
+      addressIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'address', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'address',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthDateIsNull() {
+      birthDateIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNull(property: r'birthDate'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'birthDate',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthDateIsNotNull() {
+      birthDateIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNotNull(property: r'birthDate'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'birthDate',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthDateEqualTo(DateTime? value) {
+      birthDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'birthDate', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'birthDate',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthDateGreaterThan(DateTime? value, {bool include = false}) {
+      birthDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'birthDate',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'birthDate',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthDateLessThan(DateTime? value, {bool include = false}) {
+      birthDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'birthDate',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'birthDate',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthDateBetween(
+      birthDateBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'birthDate',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'birthDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceEqualTo(String value, {bool caseSensitive = true}) {
+      birthPlaceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'birthPlace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'birthPlace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceGreaterThan(
+      birthPlaceGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'birthPlace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'birthPlace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceLessThan(
+      birthPlaceLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'birthPlace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'birthPlace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceBetween(
+      birthPlaceBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2462,195 +2289,191 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'birthPlace',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'birthPlace',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceStartsWith(String value, {bool caseSensitive = true}) {
+      birthPlaceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'birthPlace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'birthPlace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceEndsWith(String value, {bool caseSensitive = true}) {
+      birthPlaceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'birthPlace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'birthPlace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceContains(String value, {bool caseSensitive = true}) {
+      birthPlaceContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'birthPlace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'birthPlace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceMatches(String pattern, {bool caseSensitive = true}) {
+      birthPlaceMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'birthPlace',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'birthPlace',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceIsEmpty() {
+      birthPlaceIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'birthPlace', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'birthPlace',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  birthPlaceIsNotEmpty() {
+      birthPlaceIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'birthPlace', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'birthPlace',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  createdAtEqualTo(DateTime value) {
+      createdAtEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'createdAt', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createdAt',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  createdAtGreaterThan(DateTime value, {bool include = false}) {
+      createdAtGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'createdAt',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  createdAtLessThan(DateTime value, {bool include = false}) {
+      createdAtLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'createdAt',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  createdAtBetween(
+      createdAtBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'createdAt',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'createdAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceEqualTo(String value, {bool caseSensitive = true}) {
+      currentWorkplaceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'currentWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'currentWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceGreaterThan(
+      currentWorkplaceGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'currentWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'currentWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceLessThan(
+      currentWorkplaceLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'currentWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'currentWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceBetween(
+      currentWorkplaceBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2658,140 +2481,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'currentWorkplace',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'currentWorkplace',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceStartsWith(String value, {bool caseSensitive = true}) {
+      currentWorkplaceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'currentWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'currentWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceEndsWith(String value, {bool caseSensitive = true}) {
+      currentWorkplaceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'currentWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'currentWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceContains(String value, {bool caseSensitive = true}) {
+      currentWorkplaceContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'currentWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'currentWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceMatches(String pattern, {bool caseSensitive = true}) {
+      currentWorkplaceMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'currentWorkplace',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'currentWorkplace',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceIsEmpty() {
+      currentWorkplaceIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'currentWorkplace', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'currentWorkplace',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  currentWorkplaceIsNotEmpty() {
+      currentWorkplaceIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'currentWorkplace', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'currentWorkplace',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityEqualTo(String value, {bool caseSensitive = true}) {
+      documentsIssueAuthorityEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'documentsIssueAuthority',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'documentsIssueAuthority',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityGreaterThan(
+      documentsIssueAuthorityGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'documentsIssueAuthority',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'documentsIssueAuthority',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityLessThan(
+      documentsIssueAuthorityLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'documentsIssueAuthority',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'documentsIssueAuthority',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityBetween(
+      documentsIssueAuthorityBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2799,237 +2617,229 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'documentsIssueAuthority',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'documentsIssueAuthority',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityStartsWith(String value, {bool caseSensitive = true}) {
+      documentsIssueAuthorityStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'documentsIssueAuthority',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'documentsIssueAuthority',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityEndsWith(String value, {bool caseSensitive = true}) {
+      documentsIssueAuthorityEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'documentsIssueAuthority',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'documentsIssueAuthority',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityContains(String value, {bool caseSensitive = true}) {
+      documentsIssueAuthorityContains(String value,
+          {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'documentsIssueAuthority',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'documentsIssueAuthority',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityMatches(String pattern, {bool caseSensitive = true}) {
+      documentsIssueAuthorityMatches(String pattern,
+          {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'documentsIssueAuthority',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'documentsIssueAuthority',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityIsEmpty() {
+      documentsIssueAuthorityIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'documentsIssueAuthority',
-          value: '',
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'documentsIssueAuthority',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueAuthorityIsNotEmpty() {
+      documentsIssueAuthorityIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          property: r'documentsIssueAuthority',
-          value: '',
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'documentsIssueAuthority',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueDateIsNull() {
+      documentsIssueDateIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNull(property: r'documentsIssueDate'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'documentsIssueDate',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueDateIsNotNull() {
+      documentsIssueDateIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNotNull(property: r'documentsIssueDate'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'documentsIssueDate',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueDateEqualTo(DateTime? value) {
+      documentsIssueDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'documentsIssueDate', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'documentsIssueDate',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueDateGreaterThan(DateTime? value, {bool include = false}) {
+      documentsIssueDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'documentsIssueDate',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'documentsIssueDate',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueDateLessThan(DateTime? value, {bool include = false}) {
+      documentsIssueDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'documentsIssueDate',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'documentsIssueDate',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  documentsIssueDateBetween(
+      documentsIssueDateBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'documentsIssueDate',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'documentsIssueDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelIsNull() {
+      educationLevelIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNull(property: r'educationLevel'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'educationLevel',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelIsNotNull() {
+      educationLevelIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNotNull(property: r'educationLevel'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'educationLevel',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelEqualTo(EducationLevel? value, {bool caseSensitive = true}) {
+      educationLevelEqualTo(
+    EducationLevel? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'educationLevel',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'educationLevel',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelGreaterThan(
+      educationLevelGreaterThan(
     EducationLevel? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'educationLevel',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'educationLevel',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelLessThan(
+      educationLevelLessThan(
     EducationLevel? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'educationLevel',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'educationLevel',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelBetween(
+      educationLevelBetween(
     EducationLevel? lower,
     EducationLevel? upper, {
     bool includeLower = true,
@@ -3037,140 +2847,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'educationLevel',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'educationLevel',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelStartsWith(String value, {bool caseSensitive = true}) {
+      educationLevelStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'educationLevel',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'educationLevel',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelEndsWith(String value, {bool caseSensitive = true}) {
+      educationLevelEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'educationLevel',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'educationLevel',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelContains(String value, {bool caseSensitive = true}) {
+      educationLevelContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'educationLevel',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'educationLevel',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelMatches(String pattern, {bool caseSensitive = true}) {
+      educationLevelMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'educationLevel',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'educationLevel',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelIsEmpty() {
+      educationLevelIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'educationLevel', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'educationLevel',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  educationLevelIsNotEmpty() {
+      educationLevelIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'educationLevel', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'educationLevel',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberEqualTo(String value, {bool caseSensitive = true}) {
+      employeeNumberEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'employeeNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'employeeNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberGreaterThan(
+      employeeNumberGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'employeeNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'employeeNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberLessThan(
+      employeeNumberLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'employeeNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'employeeNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberBetween(
+      employeeNumberBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -3178,140 +2983,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'employeeNumber',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'employeeNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberStartsWith(String value, {bool caseSensitive = true}) {
+      employeeNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'employeeNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'employeeNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberEndsWith(String value, {bool caseSensitive = true}) {
+      employeeNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'employeeNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'employeeNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberContains(String value, {bool caseSensitive = true}) {
+      employeeNumberContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'employeeNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'employeeNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberMatches(String pattern, {bool caseSensitive = true}) {
+      employeeNumberMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'employeeNumber',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'employeeNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberIsEmpty() {
+      employeeNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'employeeNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'employeeNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  employeeNumberIsNotEmpty() {
+      employeeNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'employeeNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'employeeNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameEqualTo(String value, {bool caseSensitive = true}) {
+      fullNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'fullName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'fullName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameGreaterThan(
+      fullNameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'fullName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'fullName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameLessThan(
+      fullNameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'fullName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'fullName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameBetween(
+      fullNameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -3319,158 +3119,153 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'fullName',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'fullName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameStartsWith(String value, {bool caseSensitive = true}) {
+      fullNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'fullName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'fullName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameEndsWith(String value, {bool caseSensitive = true}) {
+      fullNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'fullName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'fullName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameContains(String value, {bool caseSensitive = true}) {
+      fullNameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'fullName',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'fullName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameMatches(String pattern, {bool caseSensitive = true}) {
+      fullNameMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'fullName',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'fullName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameIsEmpty() {
+      fullNameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'fullName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'fullName',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  fullNameIsNotEmpty() {
+      fullNameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'fullName', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'fullName',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderIsNull() {
+      genderIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNull(property: r'gender'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'gender',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderIsNotNull() {
+      genderIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNotNull(property: r'gender'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'gender',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderEqualTo(Gender? value, {bool caseSensitive = true}) {
+      genderEqualTo(
+    Gender? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'gender',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'gender',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderGreaterThan(
+      genderGreaterThan(
     Gender? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'gender',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'gender',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderLessThan(
+      genderLessThan(
     Gender? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'gender',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'gender',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderBetween(
+      genderBetween(
     Gender? lower,
     Gender? upper, {
     bool includeLower = true,
@@ -3478,140 +3273,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'gender',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'gender',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderStartsWith(String value, {bool caseSensitive = true}) {
+      genderStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'gender',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'gender',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderEndsWith(String value, {bool caseSensitive = true}) {
+      genderEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'gender',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'gender',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderContains(String value, {bool caseSensitive = true}) {
+      genderContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'gender',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'gender',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderMatches(String pattern, {bool caseSensitive = true}) {
+      genderMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'gender',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'gender',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderIsEmpty() {
+      genderIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'gender', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'gender',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  genderIsNotEmpty() {
+      genderIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'gender', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'gender',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesEqualTo(String value, {bool caseSensitive = true}) {
+      generalNotesEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'generalNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'generalNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesGreaterThan(
+      generalNotesGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'generalNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'generalNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesLessThan(
+      generalNotesLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'generalNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'generalNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesBetween(
+      generalNotesBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -3619,140 +3409,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'generalNotes',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'generalNotes',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesStartsWith(String value, {bool caseSensitive = true}) {
+      generalNotesStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'generalNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'generalNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesEndsWith(String value, {bool caseSensitive = true}) {
+      generalNotesEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'generalNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'generalNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesContains(String value, {bool caseSensitive = true}) {
+      generalNotesContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'generalNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'generalNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesMatches(String pattern, {bool caseSensitive = true}) {
+      generalNotesMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'generalNotes',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'generalNotes',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesIsEmpty() {
+      generalNotesIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'generalNotes', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'generalNotes',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  generalNotesIsNotEmpty() {
+      generalNotesIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'generalNotes', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'generalNotes',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberEqualTo(String value, {bool caseSensitive = true}) {
+      housingCardNumberEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'housingCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'housingCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberGreaterThan(
+      housingCardNumberGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'housingCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'housingCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberLessThan(
+      housingCardNumberLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'housingCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'housingCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberBetween(
+      housingCardNumberBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -3760,109 +3545,108 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'housingCardNumber',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'housingCardNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberStartsWith(String value, {bool caseSensitive = true}) {
+      housingCardNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'housingCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'housingCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberEndsWith(String value, {bool caseSensitive = true}) {
+      housingCardNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'housingCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'housingCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberContains(String value, {bool caseSensitive = true}) {
+      housingCardNumberContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'housingCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'housingCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberMatches(String pattern, {bool caseSensitive = true}) {
+      housingCardNumberMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'housingCardNumber',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'housingCardNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberIsEmpty() {
+      housingCardNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'housingCardNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'housingCardNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  housingCardNumberIsNotEmpty() {
+      housingCardNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'housingCardNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'housingCardNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition> idEqualTo(
-    Id value,
-  ) {
+      Id value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'id', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  idGreaterThan(Id value, {bool include = false}) {
+      idGreaterThan(
+    Id value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'id',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
@@ -3871,13 +3655,11 @@ extension EmployeeModelQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'id',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
@@ -3888,69 +3670,64 @@ extension EmployeeModelQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'id',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'id',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesEqualTo(String value, {bool caseSensitive = true}) {
+      jobNotesEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'jobNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'jobNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesGreaterThan(
+      jobNotesGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'jobNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'jobNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesLessThan(
+      jobNotesLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'jobNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'jobNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesBetween(
+      jobNotesBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -3958,140 +3735,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'jobNotes',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'jobNotes',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesStartsWith(String value, {bool caseSensitive = true}) {
+      jobNotesStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'jobNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'jobNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesEndsWith(String value, {bool caseSensitive = true}) {
+      jobNotesEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'jobNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'jobNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesContains(String value, {bool caseSensitive = true}) {
+      jobNotesContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'jobNotes',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'jobNotes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesMatches(String pattern, {bool caseSensitive = true}) {
+      jobNotesMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'jobNotes',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'jobNotes',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesIsEmpty() {
+      jobNotesIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'jobNotes', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'jobNotes',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobNotesIsNotEmpty() {
+      jobNotesIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'jobNotes', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'jobNotes',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleEqualTo(String value, {bool caseSensitive = true}) {
+      jobTitleEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'jobTitle',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'jobTitle',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleGreaterThan(
+      jobTitleGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'jobTitle',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'jobTitle',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleLessThan(
+      jobTitleLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'jobTitle',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'jobTitle',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleBetween(
+      jobTitleBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -4099,158 +3871,153 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'jobTitle',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'jobTitle',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleStartsWith(String value, {bool caseSensitive = true}) {
+      jobTitleStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'jobTitle',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'jobTitle',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleEndsWith(String value, {bool caseSensitive = true}) {
+      jobTitleEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'jobTitle',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'jobTitle',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleContains(String value, {bool caseSensitive = true}) {
+      jobTitleContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'jobTitle',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'jobTitle',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleMatches(String pattern, {bool caseSensitive = true}) {
+      jobTitleMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'jobTitle',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'jobTitle',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleIsEmpty() {
+      jobTitleIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'jobTitle', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'jobTitle',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  jobTitleIsNotEmpty() {
+      jobTitleIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'jobTitle', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'jobTitle',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusIsNull() {
+      maritalStatusIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNull(property: r'maritalStatus'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'maritalStatus',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusIsNotNull() {
+      maritalStatusIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        const FilterCondition.isNotNull(property: r'maritalStatus'),
-      );
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'maritalStatus',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusEqualTo(MaritalStatus? value, {bool caseSensitive = true}) {
+      maritalStatusEqualTo(
+    MaritalStatus? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'maritalStatus',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'maritalStatus',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusGreaterThan(
+      maritalStatusGreaterThan(
     MaritalStatus? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'maritalStatus',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'maritalStatus',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusLessThan(
+      maritalStatusLessThan(
     MaritalStatus? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'maritalStatus',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'maritalStatus',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusBetween(
+      maritalStatusBetween(
     MaritalStatus? lower,
     MaritalStatus? upper, {
     bool includeLower = true,
@@ -4258,140 +4025,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'maritalStatus',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'maritalStatus',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusStartsWith(String value, {bool caseSensitive = true}) {
+      maritalStatusStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'maritalStatus',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'maritalStatus',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusEndsWith(String value, {bool caseSensitive = true}) {
+      maritalStatusEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'maritalStatus',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'maritalStatus',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusContains(String value, {bool caseSensitive = true}) {
+      maritalStatusContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'maritalStatus',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'maritalStatus',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusMatches(String pattern, {bool caseSensitive = true}) {
+      maritalStatusMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'maritalStatus',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'maritalStatus',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusIsEmpty() {
+      maritalStatusIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'maritalStatus', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'maritalStatus',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  maritalStatusIsNotEmpty() {
+      maritalStatusIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'maritalStatus', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'maritalStatus',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberEqualTo(String value, {bool caseSensitive = true}) {
+      nationalCardNumberEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'nationalCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'nationalCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberGreaterThan(
+      nationalCardNumberGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'nationalCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'nationalCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberLessThan(
+      nationalCardNumberLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'nationalCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'nationalCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberBetween(
+      nationalCardNumberBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -4399,140 +4161,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'nationalCardNumber',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'nationalCardNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberStartsWith(String value, {bool caseSensitive = true}) {
+      nationalCardNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'nationalCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'nationalCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberEndsWith(String value, {bool caseSensitive = true}) {
+      nationalCardNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'nationalCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'nationalCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberContains(String value, {bool caseSensitive = true}) {
+      nationalCardNumberContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'nationalCardNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'nationalCardNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberMatches(String pattern, {bool caseSensitive = true}) {
+      nationalCardNumberMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'nationalCardNumber',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'nationalCardNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberIsEmpty() {
+      nationalCardNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'nationalCardNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'nationalCardNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalCardNumberIsNotEmpty() {
+      nationalCardNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'nationalCardNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'nationalCardNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberEqualTo(String value, {bool caseSensitive = true}) {
+      nationalNumberEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'nationalNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'nationalNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberGreaterThan(
+      nationalNumberGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'nationalNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'nationalNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberLessThan(
+      nationalNumberLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'nationalNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'nationalNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberBetween(
+      nationalNumberBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -4540,140 +4297,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'nationalNumber',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'nationalNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberStartsWith(String value, {bool caseSensitive = true}) {
+      nationalNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'nationalNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'nationalNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberEndsWith(String value, {bool caseSensitive = true}) {
+      nationalNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'nationalNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'nationalNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberContains(String value, {bool caseSensitive = true}) {
+      nationalNumberContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'nationalNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'nationalNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberMatches(String pattern, {bool caseSensitive = true}) {
+      nationalNumberMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'nationalNumber',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'nationalNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberIsEmpty() {
+      nationalNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'nationalNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'nationalNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  nationalNumberIsNotEmpty() {
+      nationalNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'nationalNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'nationalNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberEqualTo(String value, {bool caseSensitive = true}) {
+      phoneNumberEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberGreaterThan(
+      phoneNumberGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberLessThan(
+      phoneNumberLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberBetween(
+      phoneNumberBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -4681,140 +4433,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'phoneNumber',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'phoneNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberStartsWith(String value, {bool caseSensitive = true}) {
+      phoneNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberEndsWith(String value, {bool caseSensitive = true}) {
+      phoneNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberContains(String value, {bool caseSensitive = true}) {
+      phoneNumberContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'phoneNumber',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'phoneNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberMatches(String pattern, {bool caseSensitive = true}) {
+      phoneNumberMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'phoneNumber',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'phoneNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberIsEmpty() {
+      phoneNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'phoneNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'phoneNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  phoneNumberIsNotEmpty() {
+      phoneNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'phoneNumber', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'phoneNumber',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathEqualTo(String value, {bool caseSensitive = true}) {
+      photoPathEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'photoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathGreaterThan(
+      photoPathGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'photoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathLessThan(
+      photoPathLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'photoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathBetween(
+      photoPathBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -4822,140 +4569,135 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'photoPath',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'photoPath',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathStartsWith(String value, {bool caseSensitive = true}) {
+      photoPathStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'photoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathEndsWith(String value, {bool caseSensitive = true}) {
+      photoPathEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'photoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathContains(String value, {bool caseSensitive = true}) {
+      photoPathContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'photoPath',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathMatches(String pattern, {bool caseSensitive = true}) {
+      photoPathMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'photoPath',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'photoPath',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathIsEmpty() {
+      photoPathIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'photoPath', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'photoPath',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  photoPathIsNotEmpty() {
+      photoPathIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'photoPath', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'photoPath',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceEqualTo(String value, {bool caseSensitive = true}) {
+      previousWorkplaceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'previousWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'previousWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceGreaterThan(
+      previousWorkplaceGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'previousWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'previousWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceLessThan(
+      previousWorkplaceLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'previousWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'previousWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceBetween(
+      previousWorkplaceBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -4963,141 +4705,140 @@ extension EmployeeModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'previousWorkplace',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'previousWorkplace',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceStartsWith(String value, {bool caseSensitive = true}) {
+      previousWorkplaceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'previousWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'previousWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceEndsWith(String value, {bool caseSensitive = true}) {
+      previousWorkplaceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'previousWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'previousWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceContains(String value, {bool caseSensitive = true}) {
+      previousWorkplaceContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'previousWorkplace',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'previousWorkplace',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceMatches(String pattern, {bool caseSensitive = true}) {
+      previousWorkplaceMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'previousWorkplace',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'previousWorkplace',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceIsEmpty() {
+      previousWorkplaceIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'previousWorkplace', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'previousWorkplace',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  previousWorkplaceIsNotEmpty() {
+      previousWorkplaceIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'previousWorkplace', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'previousWorkplace',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  updatedAtEqualTo(DateTime value) {
+      updatedAtEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'updatedAt', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updatedAt',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  updatedAtGreaterThan(DateTime value, {bool include = false}) {
+      updatedAtGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'updatedAt',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'updatedAt',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  updatedAtLessThan(DateTime value, {bool include = false}) {
+      updatedAtLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'updatedAt',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'updatedAt',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterFilterCondition>
-  updatedAtBetween(
+      updatedAtBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'updatedAt',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'updatedAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 }
@@ -5129,7 +4870,7 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByBirthDateDesc() {
+      sortByBirthDateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'birthDate', Sort.desc);
     });
@@ -5142,7 +4883,7 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByBirthPlaceDesc() {
+      sortByBirthPlaceDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'birthPlace', Sort.desc);
     });
@@ -5155,77 +4896,77 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByCreatedAtDesc() {
+      sortByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByCurrentWorkplace() {
+      sortByCurrentWorkplace() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'currentWorkplace', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByCurrentWorkplaceDesc() {
+      sortByCurrentWorkplaceDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'currentWorkplace', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByDocumentsIssueAuthority() {
+      sortByDocumentsIssueAuthority() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'documentsIssueAuthority', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByDocumentsIssueAuthorityDesc() {
+      sortByDocumentsIssueAuthorityDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'documentsIssueAuthority', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByDocumentsIssueDate() {
+      sortByDocumentsIssueDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'documentsIssueDate', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByDocumentsIssueDateDesc() {
+      sortByDocumentsIssueDateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'documentsIssueDate', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByEducationLevel() {
+      sortByEducationLevel() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'educationLevel', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByEducationLevelDesc() {
+      sortByEducationLevelDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'educationLevel', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByEmployeeNumber() {
+      sortByEmployeeNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'employeeNumber', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByEmployeeNumberDesc() {
+      sortByEmployeeNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'employeeNumber', Sort.desc);
     });
@@ -5238,7 +4979,7 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByFullNameDesc() {
+      sortByFullNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fullName', Sort.desc);
     });
@@ -5257,28 +4998,28 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByGeneralNotes() {
+      sortByGeneralNotes() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'generalNotes', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByGeneralNotesDesc() {
+      sortByGeneralNotesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'generalNotes', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByHousingCardNumber() {
+      sortByHousingCardNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'housingCardNumber', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByHousingCardNumberDesc() {
+      sortByHousingCardNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'housingCardNumber', Sort.desc);
     });
@@ -5291,7 +5032,7 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByJobNotesDesc() {
+      sortByJobNotesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'jobNotes', Sort.desc);
     });
@@ -5304,49 +5045,49 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByJobTitleDesc() {
+      sortByJobTitleDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'jobTitle', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByMaritalStatus() {
+      sortByMaritalStatus() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'maritalStatus', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByMaritalStatusDesc() {
+      sortByMaritalStatusDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'maritalStatus', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByNationalCardNumber() {
+      sortByNationalCardNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nationalCardNumber', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByNationalCardNumberDesc() {
+      sortByNationalCardNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nationalCardNumber', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByNationalNumber() {
+      sortByNationalNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nationalNumber', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByNationalNumberDesc() {
+      sortByNationalNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nationalNumber', Sort.desc);
     });
@@ -5359,7 +5100,7 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByPhoneNumberDesc() {
+      sortByPhoneNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phoneNumber', Sort.desc);
     });
@@ -5372,21 +5113,21 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByPhotoPathDesc() {
+      sortByPhotoPathDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photoPath', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByPreviousWorkplace() {
+      sortByPreviousWorkplace() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'previousWorkplace', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByPreviousWorkplaceDesc() {
+      sortByPreviousWorkplaceDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'previousWorkplace', Sort.desc);
     });
@@ -5399,7 +5140,7 @@ extension EmployeeModelQuerySortBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  sortByUpdatedAtDesc() {
+      sortByUpdatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.desc);
     });
@@ -5427,7 +5168,7 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByBirthDateDesc() {
+      thenByBirthDateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'birthDate', Sort.desc);
     });
@@ -5440,7 +5181,7 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByBirthPlaceDesc() {
+      thenByBirthPlaceDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'birthPlace', Sort.desc);
     });
@@ -5453,77 +5194,77 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByCreatedAtDesc() {
+      thenByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByCurrentWorkplace() {
+      thenByCurrentWorkplace() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'currentWorkplace', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByCurrentWorkplaceDesc() {
+      thenByCurrentWorkplaceDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'currentWorkplace', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByDocumentsIssueAuthority() {
+      thenByDocumentsIssueAuthority() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'documentsIssueAuthority', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByDocumentsIssueAuthorityDesc() {
+      thenByDocumentsIssueAuthorityDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'documentsIssueAuthority', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByDocumentsIssueDate() {
+      thenByDocumentsIssueDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'documentsIssueDate', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByDocumentsIssueDateDesc() {
+      thenByDocumentsIssueDateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'documentsIssueDate', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByEducationLevel() {
+      thenByEducationLevel() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'educationLevel', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByEducationLevelDesc() {
+      thenByEducationLevelDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'educationLevel', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByEmployeeNumber() {
+      thenByEmployeeNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'employeeNumber', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByEmployeeNumberDesc() {
+      thenByEmployeeNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'employeeNumber', Sort.desc);
     });
@@ -5536,7 +5277,7 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByFullNameDesc() {
+      thenByFullNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fullName', Sort.desc);
     });
@@ -5555,28 +5296,28 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByGeneralNotes() {
+      thenByGeneralNotes() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'generalNotes', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByGeneralNotesDesc() {
+      thenByGeneralNotesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'generalNotes', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByHousingCardNumber() {
+      thenByHousingCardNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'housingCardNumber', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByHousingCardNumberDesc() {
+      thenByHousingCardNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'housingCardNumber', Sort.desc);
     });
@@ -5601,7 +5342,7 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByJobNotesDesc() {
+      thenByJobNotesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'jobNotes', Sort.desc);
     });
@@ -5614,49 +5355,49 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByJobTitleDesc() {
+      thenByJobTitleDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'jobTitle', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByMaritalStatus() {
+      thenByMaritalStatus() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'maritalStatus', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByMaritalStatusDesc() {
+      thenByMaritalStatusDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'maritalStatus', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByNationalCardNumber() {
+      thenByNationalCardNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nationalCardNumber', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByNationalCardNumberDesc() {
+      thenByNationalCardNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nationalCardNumber', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByNationalNumber() {
+      thenByNationalNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nationalNumber', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByNationalNumberDesc() {
+      thenByNationalNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nationalNumber', Sort.desc);
     });
@@ -5669,7 +5410,7 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByPhoneNumberDesc() {
+      thenByPhoneNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phoneNumber', Sort.desc);
     });
@@ -5682,21 +5423,21 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByPhotoPathDesc() {
+      thenByPhotoPathDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photoPath', Sort.desc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByPreviousWorkplace() {
+      thenByPreviousWorkplace() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'previousWorkplace', Sort.asc);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByPreviousWorkplaceDesc() {
+      thenByPreviousWorkplaceDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'previousWorkplace', Sort.desc);
     });
@@ -5709,7 +5450,7 @@ extension EmployeeModelQuerySortThenBy
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QAfterSortBy>
-  thenByUpdatedAtDesc() {
+      thenByUpdatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.desc);
     });
@@ -5718,9 +5459,8 @@ extension EmployeeModelQuerySortThenBy
 
 extension EmployeeModelQueryWhereDistinct
     on QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> {
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByAddress({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByAddress(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'address', caseSensitive: caseSensitive);
     });
@@ -5732,9 +5472,8 @@ extension EmployeeModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByBirthPlace({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByBirthPlace(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'birthPlace', caseSensitive: caseSensitive);
     });
@@ -5747,155 +5486,130 @@ extension EmployeeModelQueryWhereDistinct
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByCurrentWorkplace({bool caseSensitive = true}) {
+      distinctByCurrentWorkplace({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'currentWorkplace',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'currentWorkplace',
+          caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByDocumentsIssueAuthority({bool caseSensitive = true}) {
+      distinctByDocumentsIssueAuthority({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'documentsIssueAuthority',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'documentsIssueAuthority',
+          caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByDocumentsIssueDate() {
+      distinctByDocumentsIssueDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'documentsIssueDate');
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByEducationLevel({bool caseSensitive = true}) {
+      distinctByEducationLevel({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'educationLevel',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'educationLevel',
+          caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByEmployeeNumber({bool caseSensitive = true}) {
+      distinctByEmployeeNumber({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'employeeNumber',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'employeeNumber',
+          caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByFullName({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByFullName(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'fullName', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByGender({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByGender(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'gender', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByGeneralNotes({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByGeneralNotes(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'generalNotes', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByHousingCardNumber({bool caseSensitive = true}) {
+      distinctByHousingCardNumber({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'housingCardNumber',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'housingCardNumber',
+          caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByJobNotes({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByJobNotes(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'jobNotes', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByJobTitle({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByJobTitle(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'jobTitle', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByMaritalStatus({bool caseSensitive = true}) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByMaritalStatus(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'maritalStatus',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'maritalStatus',
+          caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByNationalCardNumber({bool caseSensitive = true}) {
+      distinctByNationalCardNumber({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'nationalCardNumber',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'nationalCardNumber',
+          caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByNationalNumber({bool caseSensitive = true}) {
+      distinctByNationalNumber({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'nationalNumber',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'nationalNumber',
+          caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByPhoneNumber({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByPhoneNumber(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'phoneNumber', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByPhotoPath({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<EmployeeModel, EmployeeModel, QDistinct> distinctByPhotoPath(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'photoPath', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<EmployeeModel, EmployeeModel, QDistinct>
-  distinctByPreviousWorkplace({bool caseSensitive = true}) {
+      distinctByPreviousWorkplace({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(
-        r'previousWorkplace',
-        caseSensitive: caseSensitive,
-      );
+      return query.addDistinctBy(r'previousWorkplace',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -5939,35 +5653,35 @@ extension EmployeeModelQueryProperty
   }
 
   QueryBuilder<EmployeeModel, String, QQueryOperations>
-  currentWorkplaceProperty() {
+      currentWorkplaceProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'currentWorkplace');
     });
   }
 
   QueryBuilder<EmployeeModel, String, QQueryOperations>
-  documentsIssueAuthorityProperty() {
+      documentsIssueAuthorityProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'documentsIssueAuthority');
     });
   }
 
   QueryBuilder<EmployeeModel, DateTime?, QQueryOperations>
-  documentsIssueDateProperty() {
+      documentsIssueDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'documentsIssueDate');
     });
   }
 
   QueryBuilder<EmployeeModel, EducationLevel?, QQueryOperations>
-  educationLevelProperty() {
+      educationLevelProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'educationLevel');
     });
   }
 
   QueryBuilder<EmployeeModel, String, QQueryOperations>
-  employeeNumberProperty() {
+      employeeNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'employeeNumber');
     });
@@ -5992,7 +5706,7 @@ extension EmployeeModelQueryProperty
   }
 
   QueryBuilder<EmployeeModel, String, QQueryOperations>
-  housingCardNumberProperty() {
+      housingCardNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'housingCardNumber');
     });
@@ -6011,21 +5725,21 @@ extension EmployeeModelQueryProperty
   }
 
   QueryBuilder<EmployeeModel, MaritalStatus?, QQueryOperations>
-  maritalStatusProperty() {
+      maritalStatusProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'maritalStatus');
     });
   }
 
   QueryBuilder<EmployeeModel, String, QQueryOperations>
-  nationalCardNumberProperty() {
+      nationalCardNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'nationalCardNumber');
     });
   }
 
   QueryBuilder<EmployeeModel, String, QQueryOperations>
-  nationalNumberProperty() {
+      nationalNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'nationalNumber');
     });
@@ -6044,7 +5758,7 @@ extension EmployeeModelQueryProperty
   }
 
   QueryBuilder<EmployeeModel, String, QQueryOperations>
-  previousWorkplaceProperty() {
+      previousWorkplaceProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'previousWorkplace');
     });
