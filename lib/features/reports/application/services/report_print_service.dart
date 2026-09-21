@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../../../../core/utils/arabic_text_shaper.dart';
 import '../../../employees/employees.dart';
 import '../../../organization/organization.dart';
 import '../../presentation/providers/report_providers.dart';
@@ -19,9 +20,7 @@ class ReportPrintService {
     PdfPageFormat pageFormat = PdfPageFormat.a4,
   }) async {
     final resources = await _loadResources();
-    final resolvedFormat = reportType == ReportType.employeeForm
-        ? pageFormat
-        : pageFormat.landscape;
+    final resolvedFormat = pageFormat.landscape;
     final logoImage = await _loadMemoryImage(organizationInfo?.logoPath ?? '');
     final employeeImage = reportType == ReportType.employeeForm
         ? await _loadMemoryImage(selectedEmployee?.photoPath ?? '')
@@ -64,98 +63,117 @@ class ReportPrintService {
                       employee: employee,
                       employeeImage: employeeImage,
                     ),
-                    pw.SizedBox(height: 16),
-                    _buildEmployeeSection(
-                      resources: resources,
-                      title: 'المعلومات الشخصية',
-                      fields: [
-                        _PdfField('الاسم الرباعي', _text(employee.fullName)),
-                        _PdfField(
-                          'الجنس',
-                          employee.gender?.label ?? 'غير محدد',
+                    pw.SizedBox(height: 10),
+                    pw.Row(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Expanded(
+                          child: _buildEmployeeSection(
+                            resources: resources,
+                            title: 'المعلومات الشخصية',
+                            fields: [
+                              _PdfField(
+                                'الاسم الرباعي',
+                                _text(employee.fullName),
+                              ),
+                              _PdfField(
+                                'الجنس',
+                                employee.gender?.label ?? 'غير محدد',
+                              ),
+                              _PdfField(
+                                'تاريخ الولادة',
+                                _formatDate(employee.birthDate),
+                              ),
+                              _PdfField(
+                                'محل الولادة',
+                                _text(employee.birthPlace),
+                              ),
+                              _PdfField(
+                                'الحالة الاجتماعية',
+                                employee.maritalStatus?.label ?? 'غير محدد',
+                              ),
+                              _PdfField(
+                                'رقم الهاتف',
+                                _text(employee.phoneNumber),
+                              ),
+                              _PdfField(
+                                'التحصيل الدراسي',
+                                employee.educationLevel?.label ?? 'غير محدد',
+                              ),
+                              _PdfField('العنوان', _text(employee.address)),
+                            ],
+                          ),
                         ),
-                        _PdfField(
-                          'تاريخ الولادة',
-                          _formatDate(employee.birthDate),
+                        pw.SizedBox(width: 10),
+                        pw.Expanded(
+                          child: _buildEmployeeSection(
+                            resources: resources,
+                            title: 'المستمسكات',
+                            fields: [
+                              _PdfField(
+                                'الرقم الوطني',
+                                _text(employee.nationalNumber),
+                              ),
+                              _PdfField(
+                                'رقم البطاقة الوطنية',
+                                _text(employee.nationalCardNumber),
+                              ),
+                              _PdfField(
+                                'رقم بطاقة السكن',
+                                _text(employee.housingCardNumber),
+                              ),
+                              _PdfField(
+                                'تاريخ الإصدار',
+                                _formatDate(employee.documentsIssueDate),
+                              ),
+                              _PdfField(
+                                'جهة الإصدار',
+                                _text(employee.documentsIssueAuthority),
+                              ),
+                            ],
+                          ),
                         ),
-                        _PdfField('محل الولادة', _text(employee.birthPlace)),
-                        _PdfField(
-                          'الحالة الاجتماعية',
-                          employee.maritalStatus?.label ?? 'غير محدد',
+                        pw.SizedBox(width: 10),
+                        pw.Expanded(
+                          child: _buildEmployeeSection(
+                            resources: resources,
+                            title: 'المعلومات الوظيفية',
+                            fields: [
+                              _PdfField(
+                                'الرقم الوظيفي',
+                                _text(employee.employeeNumber),
+                              ),
+                              _PdfField(
+                                'العنوان الوظيفي',
+                                _text(employee.jobTitle),
+                              ),
+                              _PdfField(
+                                'مكان العمل الحالي',
+                                _text(employee.currentWorkplace),
+                              ),
+                              _PdfField(
+                                'مكان العمل السابق',
+                                _text(employee.previousWorkplace),
+                              ),
+                            ],
+                          ),
                         ),
-                        _PdfField('رقم الهاتف', _text(employee.phoneNumber)),
-                        _PdfField(
-                          'التحصيل الدراسي',
-                          employee.educationLevel?.label ?? 'غير محدد',
-                        ),
-                        _PdfField(
-                          'العنوان',
-                          _text(employee.address),
-                          fullWidth: true,
-                        ),
-                      ],
-                    ),
-                    pw.SizedBox(height: 14),
-                    _buildEmployeeSection(
-                      resources: resources,
-                      title: 'المستمسكات',
-                      fields: [
-                        _PdfField(
-                          'الرقم الوطني',
-                          _text(employee.nationalNumber),
-                        ),
-                        _PdfField(
-                          'رقم البطاقة الوطنية',
-                          _text(employee.nationalCardNumber),
-                        ),
-                        _PdfField(
-                          'رقم بطاقة السكن',
-                          _text(employee.housingCardNumber),
-                        ),
-                        _PdfField(
-                          'تاريخ الإصدار',
-                          _formatDate(employee.documentsIssueDate),
-                        ),
-                        _PdfField(
-                          'جهة الإصدار',
-                          _text(employee.documentsIssueAuthority),
-                        ),
-                      ],
-                    ),
-                    pw.SizedBox(height: 14),
-                    _buildEmployeeSection(
-                      resources: resources,
-                      title: 'المعلومات الوظيفية',
-                      fields: [
-                        _PdfField(
-                          'الرقم الوظيفي',
-                          _text(employee.employeeNumber),
-                        ),
-                        _PdfField('العنوان الوظيفي', _text(employee.jobTitle)),
-                        _PdfField(
-                          'مكان العمل الحالي',
-                          _text(employee.currentWorkplace),
-                        ),
-                        _PdfField(
-                          'مكان العمل السابق',
-                          _text(employee.previousWorkplace),
-                        ),
-                      ],
-                    ),
-                    pw.SizedBox(height: 14),
-                    _buildEmployeeSection(
-                      resources: resources,
-                      title: 'الملاحظات',
-                      fields: [
-                        _PdfField(
-                          'ملاحظات وظيفية',
-                          _text(employee.jobNotes),
-                          fullWidth: true,
-                        ),
-                        _PdfField(
-                          'ملاحظات عامة',
-                          _text(employee.generalNotes),
-                          fullWidth: true,
+                        pw.SizedBox(width: 10),
+                        pw.Expanded(
+                          child: _buildEmployeeSection(
+                            resources: resources,
+                            title: 'الملاحظات',
+                            fields: [
+                              _PdfField(
+                                'ملاحظات وظيفية',
+                                _text(employee.jobNotes),
+                              ),
+                              _PdfField(
+                                'ملاحظات عامة',
+                                _text(employee.generalNotes),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -240,20 +258,24 @@ class ReportPrintService {
       organizationInfo?.organizationName ?? '',
       fallback: 'اسم المؤسسة غير محدد',
     );
-    final branchDepartment = [
-      if ((organizationInfo?.branchName ?? '').trim().isNotEmpty)
-        organizationInfo!.branchName.trim(),
-      if ((organizationInfo?.departmentName ?? '').trim().isNotEmpty)
-        organizationInfo!.departmentName.trim(),
-    ].join(' - ');
-    final contactLine = [
-      if ((organizationInfo?.address ?? '').trim().isNotEmpty)
-        organizationInfo!.address.trim(),
-      if ((organizationInfo?.phoneNumber ?? '').trim().isNotEmpty)
-        'هاتف: ${organizationInfo!.phoneNumber.trim()}',
-      if ((organizationInfo?.email ?? '').trim().isNotEmpty)
-        organizationInfo!.email.trim(),
-    ].join('   |   ');
+    final branchDepartment = _ar(
+      [
+        if ((organizationInfo?.branchName ?? '').trim().isNotEmpty)
+          organizationInfo!.branchName.trim(),
+        if ((organizationInfo?.departmentName ?? '').trim().isNotEmpty)
+          organizationInfo!.departmentName.trim(),
+      ].join(' - '),
+    );
+    final contactLine = _ar(
+      [
+        if ((organizationInfo?.address ?? '').trim().isNotEmpty)
+          organizationInfo!.address.trim(),
+        if ((organizationInfo?.phoneNumber ?? '').trim().isNotEmpty)
+          'هاتف: ${organizationInfo!.phoneNumber.trim()}',
+        if ((organizationInfo?.email ?? '').trim().isNotEmpty)
+          organizationInfo!.email.trim(),
+      ].join('   |   '),
+    );
 
     return pw.Directionality(
       textDirection: pw.TextDirection.rtl,
@@ -339,7 +361,7 @@ class ReportPrintService {
                 crossAxisAlignment: pw.CrossAxisAlignment.center,
                 children: [
                   pw.Text(
-                    title,
+                    _ar(title),
                     style: pw.TextStyle(
                       font: resources.boldFont,
                       fontSize: 14,
@@ -349,7 +371,7 @@ class ReportPrintService {
                   ),
                   pw.SizedBox(height: 4),
                   pw.Text(
-                    subtitle,
+                    _ar(subtitle),
                     style: pw.TextStyle(
                       font: resources.regularFont,
                       fontSize: 9,
@@ -400,7 +422,7 @@ class ReportPrintService {
             ),
             pw.SizedBox(width: 12),
             pw.Text(
-              'صفحة ${context.pageNumber} / ${context.pagesCount}',
+              _ar('صفحة ${context.pageNumber} / ${context.pagesCount}'),
               style: pw.TextStyle(
                 font: resources.boldFont,
                 fontSize: 8,
@@ -470,7 +492,7 @@ class ReportPrintService {
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
           pw.Text(
-            label,
+            _ar(label),
             style: pw.TextStyle(
               font: resources.regularFont,
               fontSize: 8,
@@ -479,7 +501,7 @@ class ReportPrintService {
           ),
           pw.SizedBox(height: 5),
           pw.Text(
-            value,
+            _ar(value),
             style: pw.TextStyle(
               font: resources.boldFont,
               fontSize: 10,
@@ -501,7 +523,7 @@ class ReportPrintService {
         border: pw.Border.all(color: PdfColors.blueGrey100),
       ),
       child: pw.Text(
-        'لا توجد سجلات مطابقة لإعدادات التقرير الحالية.',
+        _ar('لا توجد سجلات مطابقة لإعدادات التقرير الحالية.'),
         style: pw.TextStyle(
           font: resources.boldFont,
           fontSize: 11,
@@ -533,16 +555,16 @@ class ReportPrintService {
       ),
       oddRowDecoration: const pw.BoxDecoration(color: PdfColors.grey100),
       cellHeight: 24,
-      headers: const [
+      headers: [
         '#',
-        'الاسم',
-        'الرقم الوظيفي',
-        'الرقم الوطني',
-        'الجنس',
-        'الحالة الاجتماعية',
-        'التحصيل الدراسي',
-        'العنوان الوظيفي',
-        'مكان العمل',
+        _ar('الاسم'),
+        _ar('الرقم الوظيفي'),
+        _ar('الرقم الوطني'),
+        _ar('الجنس'),
+        _ar('الحالة الاجتماعية'),
+        _ar('التحصيل الدراسي'),
+        _ar('العنوان الوظيفي'),
+        _ar('مكان العمل'),
       ],
       columnWidths: const {
         0: pw.FixedColumnWidth(18),
@@ -563,9 +585,9 @@ class ReportPrintService {
           _text(employee.fullName, fallback: 'بدون اسم'),
           _text(employee.employeeNumber),
           _text(employee.nationalNumber),
-          employee.gender?.label ?? 'غير محدد',
-          employee.maritalStatus?.label ?? 'غير محدد',
-          employee.educationLevel?.label ?? 'غير محدد',
+          _ar(employee.gender?.label ?? 'غير محدد'),
+          _ar(employee.maritalStatus?.label ?? 'غير محدد'),
+          _ar(employee.educationLevel?.label ?? 'غير محدد'),
           _text(employee.jobTitle, fallback: 'غير محدد'),
           _text(employee.currentWorkplace, fallback: 'غير محدد'),
         ];
@@ -579,10 +601,10 @@ class ReportPrintService {
     required pw.MemoryImage? employeeImage,
   }) {
     return pw.Container(
-      padding: const pw.EdgeInsets.all(16),
+      padding: const pw.EdgeInsets.all(10),
       decoration: pw.BoxDecoration(
         color: PdfColors.grey100,
-        borderRadius: pw.BorderRadius.circular(14),
+        borderRadius: pw.BorderRadius.circular(12),
         border: pw.Border.all(color: PdfColors.blueGrey100),
       ),
       child: pw.Row(
@@ -596,14 +618,14 @@ class ReportPrintService {
                   _text(employee.fullName, fallback: 'بدون اسم'),
                   style: pw.TextStyle(
                     font: resources.boldFont,
-                    fontSize: 14,
+                    fontSize: 13,
                     color: PdfColors.blueGrey900,
                   ),
                 ),
-                pw.SizedBox(height: 8),
+                pw.SizedBox(height: 6),
                 pw.Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
+                  spacing: 8,
+                  runSpacing: 8,
                   children: [
                     _buildMiniBadge(
                       resources: resources,
@@ -647,7 +669,7 @@ class ReportPrintService {
         borderRadius: pw.BorderRadius.circular(10),
       ),
       child: pw.Text(
-        '$label: $value',
+        _ar('$label: $value'),
         style: pw.TextStyle(
           font: resources.regularFont,
           fontSize: 8.5,
@@ -663,8 +685,8 @@ class ReportPrintService {
   ) {
     if (employeeImage == null) {
       return pw.Container(
-        width: 90,
-        height: 108,
+        width: 72,
+        height: 88,
         alignment: pw.Alignment.center,
         decoration: pw.BoxDecoration(
           color: PdfColors.white,
@@ -672,7 +694,7 @@ class ReportPrintService {
           border: pw.Border.all(color: PdfColors.blueGrey100),
         ),
         child: pw.Text(
-          'بدون صورة',
+          _ar('بدون صورة'),
           style: pw.TextStyle(
             font: resources.boldFont,
             fontSize: 9,
@@ -684,8 +706,8 @@ class ReportPrintService {
     }
 
     return pw.Container(
-      width: 90,
-      height: 108,
+      width: 72,
+      height: 88,
       decoration: pw.BoxDecoration(
         borderRadius: pw.BorderRadius.circular(10),
         border: pw.Border.all(color: PdfColors.blueGrey100),
@@ -727,82 +749,76 @@ class ReportPrintService {
       crossAxisAlignment: pw.CrossAxisAlignment.stretch,
       children: [
         pw.Container(
-          padding: const pw.EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: pw.BoxDecoration(
             color: _secondaryColor,
             borderRadius: const pw.BorderRadius.only(
-              topLeft: pw.Radius.circular(12),
-              topRight: pw.Radius.circular(12),
+              topLeft: pw.Radius.circular(10),
+              topRight: pw.Radius.circular(10),
             ),
           ),
           child: pw.Text(
-            title,
+            _ar(title),
             style: pw.TextStyle(
               font: resources.boldFont,
-              fontSize: 11,
+              fontSize: 10,
               color: _primaryColor,
             ),
           ),
         ),
         pw.Container(
-          padding: const pw.EdgeInsets.all(14),
+          padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: pw.BoxDecoration(
             color: PdfColors.white,
             borderRadius: const pw.BorderRadius.only(
-              bottomLeft: pw.Radius.circular(12),
-              bottomRight: pw.Radius.circular(12),
+              bottomLeft: pw.Radius.circular(10),
+              bottomRight: pw.Radius.circular(10),
             ),
             border: pw.Border.all(color: PdfColors.blueGrey100),
           ),
-          child: pw.Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: fields.map((field) {
-              return pw.SizedBox(
-                width: field.fullWidth ? 520 : 240,
-                child: _buildEmployeeFieldCard(
-                  resources: resources,
-                  field: field,
-                ),
-              );
-            }).toList(),
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+            children: fields
+                .map((field) => _buildCompactFieldRow(resources: resources, field: field))
+                .toList(),
           ),
         ),
       ],
     );
   }
 
-  pw.Widget _buildEmployeeFieldCard({
+  pw.Widget _buildCompactFieldRow({
     required _PdfResources resources,
     required _PdfField field,
   }) {
     return pw.Container(
-      padding: const pw.EdgeInsets.all(12),
-      decoration: pw.BoxDecoration(
-        color: PdfColors.grey100,
-        borderRadius: pw.BorderRadius.circular(10),
+      padding: const pw.EdgeInsets.symmetric(vertical: 3),
+      decoration: const pw.BoxDecoration(
+        border: pw.Border(
+          bottom: pw.BorderSide(color: PdfColors.grey200, width: 0.5),
+        ),
       ),
-      child: pw.Column(
-        crossAxisAlignment: pw.CrossAxisAlignment.start,
-        children: [
-          pw.Text(
-            field.label,
-            style: pw.TextStyle(
-              font: resources.regularFont,
-              fontSize: 8,
-              color: PdfColors.grey700,
+      child: pw.RichText(
+        text: pw.TextSpan(
+          children: [
+            pw.TextSpan(
+              text: _ar('${field.label}: '),
+              style: pw.TextStyle(
+                font: resources.boldFont,
+                fontSize: 8,
+                color: PdfColors.grey700,
+              ),
             ),
-          ),
-          pw.SizedBox(height: 6),
-          pw.Text(
-            field.value,
-            style: pw.TextStyle(
-              font: resources.boldFont,
-              fontSize: 10,
-              color: PdfColors.blueGrey900,
+            pw.TextSpan(
+              text: _ar(field.value),
+              style: pw.TextStyle(
+                font: resources.boldFont,
+                fontSize: 9,
+                color: PdfColors.blueGrey900,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -861,9 +877,11 @@ class ReportPrintService {
     }
   }
 
+  String _ar(String value) => shapeArabicText(value);
+
   String _text(String value, {String fallback = 'غير مسجل'}) {
     final normalized = value.trim();
-    return normalized.isEmpty ? fallback : normalized;
+    return shapeArabicText(normalized.isEmpty ? fallback : normalized);
   }
 
   String _formatDate(DateTime? date, {bool includeTime = false}) {
@@ -898,11 +916,10 @@ class _PdfResources {
 }
 
 class _PdfField {
-  const _PdfField(this.label, this.value, {this.fullWidth = false});
+  const _PdfField(this.label, this.value);
 
   final String label;
   final String value;
-  final bool fullWidth;
 }
 
 final PdfColor _primaryColor = PdfColor.fromInt(0xFF133A67);
