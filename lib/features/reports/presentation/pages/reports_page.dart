@@ -647,16 +647,33 @@ class _EmployeeInfoTile extends StatelessWidget {
   }
 }
 
-class _ReportEmployeesTable extends StatelessWidget {
+class _ReportEmployeesTable extends StatefulWidget {
   const _ReportEmployeesTable({required this.employees});
 
   final List<EmployeeModel> employees;
 
   @override
+  State<_ReportEmployeesTable> createState() => _ReportEmployeesTableState();
+}
+
+class _ReportEmployeesTableState extends State<_ReportEmployeesTable> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final employees = widget.employees;
+
     return Scrollbar(
+      controller: _scrollController,
       thumbVisibility: true,
       child: SingleChildScrollView(
+        controller: _scrollController,
         scrollDirection: Axis.horizontal,
         child: ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 980),

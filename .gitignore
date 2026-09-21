@@ -33,6 +33,17 @@ migrate_working_dir/
 /build/
 /coverage/
 
+# Isar native core binary downloaded locally for running tests
+# (Isar.initializeIsarCore(download: true)) — not a build artifact to commit.
+/isar.dll
+/libisar.so
+/libisar.dylib
+
+# نماذج PDF تُولَّد يدوياً عبر test/generate_sample_pdf_test.dart للمعاينة
+# فقط، وليست ملفات مصدرية يجب حفظها في المستودع.
+/sample_employee_form.pdf
+/sample_all_employees_report.pdf
+
 # Symbolication related
 app.*.symbols
 

@@ -251,7 +251,6 @@ class _SidebarContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       Icons.apartment_rounded,
@@ -259,12 +258,15 @@ class _SidebarContent extends StatelessWidget {
                       size: 22,
                     ),
                     SizedBox(width: 10),
-                    Text(
-                      'النظام الإداري',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                    Flexible(
+                      child: Text(
+                        'النظام الإداري',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ],

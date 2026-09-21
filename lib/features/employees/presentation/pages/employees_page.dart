@@ -474,7 +474,7 @@ class _SummaryChip extends StatelessWidget {
   }
 }
 
-class _EmployeesDataTable extends StatelessWidget {
+class _EmployeesDataTable extends StatefulWidget {
   const _EmployeesDataTable({
     required this.employees,
     required this.onView,
@@ -490,10 +490,31 @@ class _EmployeesDataTable extends StatelessWidget {
   final ValueChanged<EmployeeModel> onPrint;
 
   @override
+  State<_EmployeesDataTable> createState() => _EmployeesDataTableState();
+}
+
+class _EmployeesDataTableState extends State<_EmployeesDataTable> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final employees = widget.employees;
+    final onView = widget.onView;
+    final onEdit = widget.onEdit;
+    final onDelete = widget.onDelete;
+    final onPrint = widget.onPrint;
+
     return Scrollbar(
+      controller: _scrollController,
       thumbVisibility: true,
       child: SingleChildScrollView(
+        controller: _scrollController,
         scrollDirection: Axis.horizontal,
         child: ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 1180),
